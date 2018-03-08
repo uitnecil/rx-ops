@@ -1,0 +1,72 @@
+
+
+More details at: https://tolikcode.github.io/post/rxjsMap/
+
+<div class="flex-row-container">
+  <div class="column">
+    <strong><u>mergeMap:</u></strong>
+    <ul>
+      <li>mergeMap emits items into the resulting Observable just as they are emitted from inner Observables. It doesn’t wait for anything.</li>
+      <li>mergeMap doesn’t preserve the order from outer Observable. Collections of results may interleave based on response timings.</li>
+      <li>mergeMap doesn’t cancel any inner Observables. All values from inner Observables will get to the final collection.</li>
+    </ul>
+  </div>
+
+  <div class="column">
+    <strong><u>concatMap:</u></strong>
+    <ul>
+      <li>concatMap waits for inner Observable to complete before taking items from the next inner Observable.</li>
+      <li>concatMap does preserve the order from outer Observable. Collections of results don’t interleave.</li>
+      <li>Just as mergeMap, concatMap doesn’t cancel any inner Observables. All results from inner Observables get to the final collection.</li>
+    </ul>
+  </div>
+
+  <div class="column">
+    <strong><u>switchMap:</u></strong>
+    <ul>
+      <li>switchMap emits items only from the most recent inner Observable.</li>
+      <li>switchMap cancels previous inner Observables when a new inner Observable appears. Items of inner Observable that were emitted after the Observable was canceled will be lost (not included in the resulting Observable).
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="flex-row-container">
+  <div class="column">
+    <mat-form-field>
+      <input matInput placeholder="mergeMap" #input1 autofocus>
+    </mat-form-field>
+    Results:
+    <ul>
+      <li *ngFor="let elem of onInput1$ | async">
+        [{{elem.searchString.length}}] - {{elem.searchString}} - delay {{elem.replyDurationSeconds}} seconds
+      </li>
+    </ul>
+  </div>
+
+  <div class="column">
+    <mat-form-field>
+      <input matInput placeholder="concatMap" [value]="input1.value" #input2 readonly>
+    </mat-form-field>
+    Results:
+    <ul>
+      <li *ngFor="let elem of onInput2$ | async">
+        [{{elem.searchString.length}}] - {{elem.searchString}} - delay {{elem.replyDurationSeconds}} seconds
+      </li>
+    </ul>
+  </div>
+
+  <div class="column">
+    <mat-form-field>
+      <input matInput placeholder="switchMap" [value]="input1.value" #input3 readonly>
+    </mat-form-field>
+    Results:
+    <ul>
+      <li *ngFor="let elem of onInput3$ | async">
+        [{{elem.searchString.length}}] - {{elem.searchString}} - delay {{elem.replyDurationSeconds}} seconds
+      </li>
+    </ul>
+  </div>
+
+</div>

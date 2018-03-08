@@ -1,0 +1,5 @@
+<div class="border-it width30 font-small min-height30">
+  <div *ngFor="let elem of messages | async" [ngClass]="{red: elem.age > 15}">
+    {{elem | json}}
+  </div>
+</div>

@@ -1,1 +1,83 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+.border-it {
+  /*display: flex;*/
+  margin: 10px;
+  border: 1px solid gray;
+  border-radius: 2px;
+}
+
+.width30 {
+  width: 30%;
+}
+
+.min-height30 {
+  /*min-height: 30%;*/
+  min-height: 20vh;
+}
+
+.width25 {
+  width: 25%;
+}
+
+.red {
+  color: red;
+}
+
+.font-small {
+  font-size: small;
+}
+
+.style-component {
+  display: block;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 4px;
+
+  height: 100vh;
+  min-width: 650px;
+
+}
+
+
+.flex-row-container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: space-around;
+  flex: 1 1 auto;
+}
+.column {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: stretch;
+  align-content: flex-start;
+  justify-content: center;
+  flex: 1 1 33%;
+  min-width: 200px;
+
+  border-width: 0 1px 0 0;
+  border-style: solid;
+  border-color: gray;
+  padding: 10px;
+}
+
+.column:last-child {
+  border-width: 0;
+}
+
+/*.column mat-form-field {*/
+/*padding: 20px;*/
+/*}*/
+
+.margin-top-10px {
+  margin-top: 10px;
+}

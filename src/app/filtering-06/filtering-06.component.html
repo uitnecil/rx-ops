@@ -1,0 +1,50 @@
+<div class="margin-top-10px">
+  <strong>How to use:</strong>
+  <ul>
+    <li>Enter the desirer length of the Array and press the <strong>Process</strong> button</li>
+  </ul>
+</div>
+
+<div class="flex-row-container">
+  <div class="column">
+    <div>
+      <mat-form-field class="input">
+        <input matInput placeholder="length [5..50], default 10" #input1 autofocus (keydown.enter)="process(input1.value); input1.value = '';">
+      </mat-form-field>
+      <button mat-raised-button color="accent" (click)="process(input1.value); input1.value = '';">Process</button>
+    </div>
+    Test array:
+    <div>[ {{theArray.join(', ')}} ]</div>
+  </div>
+
+</div>
+
+<div class="flex-row-container">
+  <div class="column">
+    Results:
+    <ul>
+      <li *ngFor="let elem of onInput1$ | async">
+        {{elem}}
+      </li>
+    </ul>
+  </div>
+
+  <div class="column">
+    Results:
+    <ul>
+      <li *ngFor="let elem of onInput2$ | async">
+        {{elem}}
+      </li>
+    </ul>
+  </div>
+
+  <div class="column">
+    Results:
+    <ul>
+      <li *ngFor="let elem of onInput3$ | async">
+        {{elem}}
+      </li>
+    </ul>
+  </div>
+
+</div>

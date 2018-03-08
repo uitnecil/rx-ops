@@ -1,0 +1,31 @@
+.categories-row {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  align-content: flex-start;
+  justify-content: flex-start;
+
+}
+.categories-column {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  align-content: flex-start;
+  justify-content: flex-start;
+
+  margin: 0 10px 0 0;
+  padding: 0 10px 0 0;
+  border-right: 1px solid gray;
+  width: 33vw;
+
+}
+
+.categories-column:last-child {
+  border-right: 0;
+}
+
+.category {
+  margin-top: 10px;
+  padding: 10px;
+  border-top: 1px solid gray;
+}
