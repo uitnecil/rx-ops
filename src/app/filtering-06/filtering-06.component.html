@@ -1,7 +1,7 @@
 <div class="margin-top-10px">
   <strong>How to use:</strong>
   <ul>
-    <li>Enter the desirer length of the Array and press the <strong>Process</strong> button</li>
+    <li>Enter the desired length of the Array and press the <strong>Process</strong> button</li>
   </ul>
 </div>
 
@@ -9,42 +9,92 @@
   <div class="column">
     <div>
       <mat-form-field class="input">
-        <input matInput placeholder="length [5..50], default 10" #input1 autofocus (keydown.enter)="process(input1.value); input1.value = '';">
+        <input matInput placeholder="length [5..50], default 10" #input1 autofocus
+               (keydown.enter)="process(input1.value); input1.value = '';">
       </mat-form-field>
       <button mat-raised-button color="accent" (click)="process(input1.value); input1.value = '';">Process</button>
     </div>
+    <br>
     Test array:
     <div>[ {{theArray.join(', ')}} ]</div>
   </div>
 
 </div>
 
+<!--DISPLAY RESULTS-->
+
 <div class="flex-row-container">
-  <div class="column">
-    Results:
-    <ul>
-      <li *ngFor="let elem of onInput1$ | async">
-        {{elem}}
-      </li>
-    </ul>
+
+  <div class="column-simple">
+    <div>
+      <strong>filter(odd):</strong> {{filter$ | async}}
+    </div>
+    <div>
+      completed: {{filterCompleted || false}}
+    </div>
   </div>
 
-  <div class="column">
-    Results:
-    <ul>
-      <li *ngFor="let elem of onInput2$ | async">
-        {{elem}}
-      </li>
-    </ul>
+
+  <div class="column-simple">
+    <div>
+      <strong>first():</strong> {{first$ | async}}
+    </div>
+    <div>
+      completed: {{firstCompleted || false}}
+    </div>
   </div>
 
-  <div class="column">
-    Results:
-    <ul>
-      <li *ngFor="let elem of onInput3$ | async">
-        {{elem}}
-      </li>
-    </ul>
+  <div class="column-simple">
+    <div>
+      <strong>take(3):</strong> {{take$ | async}}
+    </div>
+    <div>
+      completed: {{takeCompleted || false}}
+    </div>
+  </div>
+
+  <div class="column-simple">
+    <div>
+      <strong>takeLast(2):</strong> {{takeLast$ | async}}
+    </div>
+    <div>
+      completed: {{takeLastCompleted || false}}
+    </div>
+  </div>
+
+  <div class="column-simple">
+    <div>
+      <strong>last():</strong> {{last$ | async}}
+    </div>
+    <div>
+      completed: {{lastCompleted || false}}
+    </div>
+  </div>
+
+  <div class="column-simple">
+    <div>
+      <strong>takeUntil(Obs):</strong> {{takeUntil$ | async}}
+    </div>
+    <div>
+      completed: {{takeUntilCompleted || false}}
+    </div>
+    <div class="margin-top-10px">
+      <button mat-raised-button color="accent" #takeUntil>takeUntil button Press</button>
+    </div>
+  </div>
+
+  <div class="column-simple">
+    <div>
+      <strong>takeWhile():</strong> {{takeWhile$ | async}}
+    </div>
+    <div>
+      completed: {{takeWhileCompleted || false}}
+    </div>
+    <div class="margin-top-10px">
+      <button mat-raised-button color="accent" #takeWhile>takeWhile Switcher</button>
+    </div>
+    Take values: {{takeWhilePressed}}
+
   </div>
 
 </div>

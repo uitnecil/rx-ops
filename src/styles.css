@@ -70,6 +70,23 @@ body {
   padding: 10px;
 }
 
+/*.column-20 {*/
+  /*display: flex;*/
+  /*flex-flow: column nowrap;*/
+  /*align-items: stretch;*/
+  /*align-content: stretch;*/
+  /*justify-content: center;*/
+  /*flex: 0 0 20%;*/
+  /*!*min-width: 100px;*!*/
+
+  /*border-width: 0 1px 0 0;*/
+  /*border-style: solid;*/
+  /*border-color: gray;*/
+  /*padding: 10px;*/
+/*}*/
+
+
+
 .column:last-child {
   border-width: 0;
 }

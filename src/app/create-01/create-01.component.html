@@ -10,7 +10,8 @@
   <div class="column">
     <div>
       <mat-form-field class="input">
-        <input matInput placeholder="Enter value to add to the test array" #input1 autofocus (keydown.enter)="addToArray(input1.value); input1.value = '';">
+        <input matInput placeholder="Enter value to add to the test array" #input1 autofocus
+               (keydown.enter)="addToArray(input1.value); input1.value = '';">
       </mat-form-field>
       <button mat-raised-button (click)="addToArray(input1.value); input1.value = '';">Add to Array</button>
       <button mat-raised-button color="accent" (click)="process()">Process Array</button>
@@ -25,68 +26,28 @@
 
 <div class="flex-row-container">
 
- <!-- <div class="column">
-    Observable.of( [ {{theArray.join(', ')}} ] ):
-    <ul>
-      <li *ngFor="let elem of obsOf">
-        <div *ngIf="isArray(elem)">Array => [{{elem}}]</div>
-        <div *ngIf="!isArray(elem)">{{elem}}</div>
-      </li>
-    </ul>
-  </div>
-
-  <div class="column">
-    Observable.of( ...[ {{theArray.join(', ')}} ] ):
-    <ul>
-      <li *ngFor="let elem of obsOfSpread">
-        <div *ngIf="isArray(elem)">Array => [{{elem}}]</div>
-        <div *ngIf="!isArray(elem)">{{elem}}</div>
-      </li>
-    </ul>
-  </div>
-
-  <div class="column">
-    Observable.from( [ {{theArray.join(', ')}} ] ):
-    <ul>
-      <li *ngFor="let elem of obsFrom">
-        <div *ngIf="isArray(elem)">Array => [{{elem}}]</div>
-        <div *ngIf="!isArray(elem)">{{elem}}</div>
-        </li>
-    </ul>
-  </div>-->
-
   <div class="column">
     Observable.of([ {{theArray.join(', ')}} ]):
-    <!--<ul>-->
-      <!--<li *ngFor="let elem of obsOf$ | async">-->
-        <!--{{elem}}-->
-      <!--</li>-->
-    <!--</ul>-->
-    {{obsOf$ | async}}
-
+    <br>
+    Output:
+    <div class="flex-row">
+      <span *ngIf="isArray(obsOf$ | async)">[</span>
+      {{obsOf$ | async}}
+      <span *ngIf="isArray(obsOf$ | async)">]</span>
+    </div>
   </div>
 
   <div class="column">
     Observable.of(...[ {{theArray.join(', ')}} ]):
-    <!--<ul>-->
-      <!--<li *ngFor="let elem of obsOfSpread$ | async">-->
-        <!--{{elem}}-->
-      <!--</li>-->
-    <!--</ul>-->
-    {{ obsOfSpread$ | async }}
+    <br>
+    Output: {{ obsOfSpread$ | async }}
 
   </div>
 
   <div class="column">
     Observable.from([ {{theArray.join(', ')}} ]):
-
-    Results:
-    <!--<ul>-->
-      <!--<li *ngFor="let elem of obsFrom$ | async">-->
-        <!--{{elem}}-->
-      <!--</li>-->
-    <!--</ul>-->
-    {{obsFrom$ | async}}
+    <br>
+    Output: {{obsFrom$ | async}}
   </div>
 
 </div>

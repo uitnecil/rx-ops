@@ -1,0 +1,8 @@
+.column-simple {
+  min-width: 100px;
+
+  border-width: 0 1px 0 0;
+  border-style: solid;
+  border-color: gray;
+  padding: 10px;
+}
