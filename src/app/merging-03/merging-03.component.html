@@ -1,0 +1,104 @@
+<div class="margin-top-10px">
+  <strong>How to use:</strong>
+  <ul>
+    <li><strong>Map</strong> (static method/ instance method): Offers the possibility for each value of the stream to
+      be altered based on a function.
+    </li>
+    <li><strong>Concat</strong> (static method/ instance method): Concatenates the output of two streams. Values from
+      first stream are returned first and once it is completed, the second stream values are returned. If first stream
+      is infinite, the values from the second stream will never be emitted.
+    </li>
+    <li><strong>Merge</strong> (static method/ instance method): Merges the values between two streams. Values are
+      returned individually in the order they were emitted by each stream.
+    </li>
+  </ul>
+</div>
+
+<div class="flex-row-container">
+  <div class="column">
+    Test data streams:
+    <div>Stream 1 (Obs1): [ '1-1', '1-2', '1-3', '1-4', '1-5', '1-end'] - ticks every second</div>
+    <div>Stream 2 (Obs2): [ '2-1', '2-2', '2-3', '2-4', '2-5', '2-end'] - ticks every second</div>
+  </div>
+
+</div>
+
+<!--DISPLAY RESULTS-->
+
+<div class="flex-row-container">
+
+  <div class="column">
+    <div>
+      <strong>Obs1:</strong>
+    </div>
+    <div>
+      <ul *ngFor="let elem of stream1Tick">
+        <li>
+          {{elem}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="column">
+    <div>
+      <strong>Obs2:</strong>
+    </div>
+    <div>
+      <ul *ngFor="let elem of stream2Tick">
+        <li>
+          {{elem}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="column">
+    <div>
+      <strong>Obs1.map(elem => otherVal + elem):</strong>
+    </div>
+    <div>
+      <ul *ngFor="let elem of streamMapTick">
+        <li>
+          {{elem}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="column">
+    <div>
+      <strong>merge(Obs1, Obs2)
+        <br>
+        OR
+        <br>
+        Obs1.merge(Obs2):</strong>
+    </div>
+    <div>
+      <ul *ngFor="let elem of streamsMergeTick">
+        <li>
+          {{elem}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="column">
+    <div>
+      <strong>concat(Obs1, Obs2)
+        <br>
+        OR
+        <br>
+        Obs1.concat(Obs2):</strong>
+    </div>
+    <div>
+      <ul *ngFor="let elem of streamsConcatTick">
+        <li>
+          {{elem}}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>

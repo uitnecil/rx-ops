@@ -2,6 +2,8 @@
   <strong>How to use:</strong>
   <ul>
     <li>Enter the desired length of the Array and press the <strong>Process</strong> button</li>
+    <li>After Process has been used once page needs to be refreshed in order for all operators to be re-instantiated</li>
+    <li>Press <strong>Complete Source$</strong> to be able to view the results from last() and takeLast(n) operators which require the source to complete</li>
   </ul>
 </div>
 
@@ -69,6 +71,9 @@
     <div>
       completed: {{lastCompleted || false}}
     </div>
+    <div class="margin-top-10px">
+      <button mat-raised-button color="accent" (click)="valueGenerator.complete();">Complete Source$</button>
+    </div>
   </div>
 
   <div class="column-simple">
@@ -79,7 +84,7 @@
       completed: {{takeUntilCompleted || false}}
     </div>
     <div class="margin-top-10px">
-      <button mat-raised-button color="accent" #takeUntil>takeUntil button Press</button>
+      <button mat-raised-button #takeUntil>takeUntil button Press</button>
     </div>
   </div>
 
@@ -91,7 +96,7 @@
       completed: {{takeWhileCompleted || false}}
     </div>
     <div class="margin-top-10px">
-      <button mat-raised-button color="accent" #takeWhile>takeWhile Switcher</button>
+      <button mat-raised-button #takeWhile>takeWhile Switcher</button>
     </div>
     Take values: {{takeWhilePressed}}
 

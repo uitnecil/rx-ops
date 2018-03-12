@@ -1,4 +1,4 @@
-import {Injectable, OnDestroy, OnInit} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {DataModel} from './data.model';
 import 'rxjs/add/observable/fromEvent';
@@ -11,8 +11,8 @@ import {Subscription} from 'rxjs/Subscription';
 import {Subject} from 'rxjs/Subject';
 
 @Injectable()
-export class DataService implements OnDestroy{
-  public source1$: Observable<DataModel>;
+export class DataService implements OnDestroy {
+  // public source1$: Observable<DataModel>;
   public subscriptions: Subscription = new Subscription();
 
   private socket = new WebSocket('ws://echo.websocket.org');
@@ -47,23 +47,25 @@ export class DataService implements OnDestroy{
   }
 
 
-  onOpen(evt): void {
-    console.log(`WS connected`, evt);
-  }
+  // onOpen(evt): void {
+  //   console.log(`WS connected`, evt);
+  // }
 
-  onError(evt): void {
+  static onError(evt): void {
     console.log(evt);
   }
 
   onClose(evt): void {
-    console.log(`WS Closed`, evt );
-    this.socket.close();
+    console.log(`WS Closed`, evt);
+    if (this.socket.readyState === WebSocket.OPEN) {
+      this.socket.close();
+    }
     this.subscriptions.unsubscribe();
   }
 
-  onMessage(evt: any): void {
-    console.log(`Received: `, evt);
-  }
+  // onMessage(evt: any): void {
+  //   console.log(`Received: `, evt);
+  // }
 
   addMessage(msg: DataModel): void {
     this.outgoingMessage.next(msg);
@@ -73,16 +75,16 @@ export class DataService implements OnDestroy{
     const combineThem = (ev, msg) => {
       return [ev, JSON.stringify(msg)];
     };
-      const combined$ = this.wsOpen$.combineLatest(this.outgoingMessage, combineThem)
-        .subscribe(([ev, msg]) => {
-          if (this.socket.readyState === WebSocket.OPEN) {
-            this.socket.send(msg);
-            // console.log(`Sent`, msg);
-          }
-        });
+    const combined$ = this.wsOpen$.combineLatest(this.outgoingMessage, combineThem)
+      .subscribe(([ev, msg]) => {
+        if (this.socket.readyState === WebSocket.OPEN) {
+          this.socket.send(msg);
+          // console.log(`Sent`, msg);
+        }
+      });
 
-      // add subscription to the unsubscribe list
-      this.subscriptions.add(combined$);
+    // add subscription to the unsubscribe list
+    this.subscriptions.add(combined$);
   }
 
   ngOnDestroy() {

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostBinding, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, HostBinding, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/concatMap';
@@ -14,20 +14,22 @@ import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/takeWhile';
 import 'rxjs/add/observable/fromEvent';
 import {MatButton} from '@angular/material';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-filtering-06',
   templateUrl: './filtering-06.component.html',
   styleUrls: ['./filtering-06.component.css']
 })
-export class Filtering06Component implements OnInit, AfterViewInit {
+export class Filtering06Component implements OnInit, OnDestroy, AfterViewInit {
   @HostBinding('class') margin = 'style-component';
 
   @ViewChild('takeUntil') takeUntilButton: MatButton;
   @ViewChild('takeWhile') takeWhileButton: MatButton;
 
+  private unsubscribeAll: Subscription = new Subscription();
 
-  private valueGenerator: Subject<number[]> = new Subject<number[]>();
+  public valueGenerator: Subject<number[]> = new Subject<number[]>();
   public source$: Observable<any>;
   public filter$: Observable<any>;
   public first$: Observable<any>;
@@ -53,6 +55,13 @@ export class Filtering06Component implements OnInit, AfterViewInit {
 
   public theArray: any[] = [];
 
+  static generateArray(length: number) {
+    // just some sample values
+    const tempLength = (length >= 5) && (length <= 50) ? length : 10;
+    return Array.from({length: tempLength}, (v, i) => i + 1);
+  }
+
+
   constructor() {
     // push every second a value down the stream
     this.source$ = this.valueGenerator
@@ -72,7 +81,7 @@ export class Filtering06Component implements OnInit, AfterViewInit {
       .take(3);
 
     this.takeLast$ = this.source$
-      .takeLast(1);
+      .takeLast(2);
 
     this.last$ = this.source$
       .last();
@@ -80,8 +89,6 @@ export class Filtering06Component implements OnInit, AfterViewInit {
     this.takeWhile$ = this.source$
       .takeWhile(() => this.takeWhilePressed === true);
     // .takeWhile((val: number) => val > 4 && val < 6);
-
-
 
   }
 
@@ -113,40 +120,46 @@ export class Filtering06Component implements OnInit, AfterViewInit {
     this.valueGenerator.next(this.theArray = this.generateArray(val));
   }
 
-  generateArray(length: number) {
-    // just some sample values
-    const tempLength = (length >= 5) && (length <= 50) ? length : 10;
-    return Array.from({length: tempLength}, (v, i) => i + 1);
-  }
-
   logObs() {
-    this.filter$.subscribe(val => console.log(`first$: ${val}`), console.log, () => {
+    const sub1 = this.filter$.subscribe(val => console.log(`first$: ${val}`), console.log, () => {
       console.log(`filter$ observable completed.`);
       this.filterCompleted = true;
     });
-    this.first$.subscribe(val => console.log(`first$: ${val}`), console.log, () => {
+    const sub2 = this.first$.subscribe(val => console.log(`first$: ${val}`), console.log, () => {
       console.log(`first$ observable completed.`);
       this.firstCompleted = true;
     });
-    this.take$.subscribe(val => console.log(`take$: ${val}`), console.log, () => {
+    const sub3 = this.take$.subscribe(val => console.log(`take$: ${val}`), console.log, () => {
       console.log(`take$ observable completed.`);
       this.takeCompleted = true;
     });
-    this.takeLast$.subscribe(val => console.log(`takeLast$: ${val}`), console.log, () => {
+    const sub4 = this.takeLast$.subscribe(val => console.log(`takeLast$: ${val}`), console.log, () => {
       console.log(`takeLast$ observable completed.`);
       this.takeLastCompleted = true;
     });
-    this.last$.subscribe(val => console.log(`last$: ${val}`), console.log, () => {
+    const sub5 = this.last$.subscribe(val => console.log(`last$: ${val}`), console.log, () => {
      console.log(`last$ observable completed.`);
      this.lastCompleted = true;
     });
-    this.takeWhile$.subscribe(val => console.log(`takeWhile$: ${val}`), console.log, () => {
+    const sub6 = this.takeWhile$.subscribe(val => console.log(`takeWhile$: ${val}`), console.log, () => {
       console.log(`takeWhile$ observable completed.`);
       this.takeWhileCompleted = true;
     });
-    this.takeUntil$.subscribe(val => console.log(`takeUntil$: ${val}`), console.log, () => {
+    const sub7 = this.takeUntil$.subscribe(val => console.log(`takeUntil$: ${val}`), console.log, () => {
       console.log(`takeUntil$ observable completed.`);
       this.takeUntilCompleted = true;
     });
+
+    this.unsubscribeAll.add(sub1);
+    this.unsubscribeAll.add(sub2);
+    this.unsubscribeAll.add(sub3);
+    this.unsubscribeAll.add(sub4);
+    this.unsubscribeAll.add(sub5);
+    this.unsubscribeAll.add(sub6);
+    this.unsubscribeAll.add(sub7);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribeAll.unsubscribe();
   }
 }

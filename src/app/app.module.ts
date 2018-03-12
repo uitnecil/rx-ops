@@ -16,6 +16,7 @@ import {SEARCH04_INJECTABLE} from './search-04.service';
 import { Create01Component } from './create-01/create-01.component';
 import { Combining02Component } from './combining-02/combining-02.component';
 import { Filtering06Component } from './filtering-06/filtering-06.component';
+import { Merging03Component } from './merging-03/merging-03.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { Filtering06Component } from './filtering-06/filtering-06.component';
     HomeComponent,
     Create01Component,
     Combining02Component,
-    Filtering06Component
+    Filtering06Component,
+    Merging03Component
   ],
   imports: [
     BrowserModule,
