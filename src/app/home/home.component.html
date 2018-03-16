@@ -2,38 +2,123 @@
   Welcome to Home.
   Use the navigation button to go to the corresponding example
   <div class="categories-row">
-  <div class="categories-column">
+    <div class="categories-column">
 
-    <div class="category">
-      <strong><u>01-Creation simple:</u></strong>
-      <ul>
-        <li>Observable.of()</li>
-        <li>Observable.from()</li>
-      </ul>
+      <div class="category">
+        <strong><u>01-Creation:</u></strong>
+        <ul>
+
+          <li>
+            <span class="operator-title">.of()</span>
+            <strong>Description:</strong> Emit variable amount of values in a sequence.<br>
+            <strong>signature:</strong> of(...values, scheduler: Scheduler): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .from() (does also what .fromPromise() does)</span>
+            <strong>Description:</strong> Turn an array, promise, or iterable into an observable.<br>
+            <strong>signature:</strong> from(ish: ObservableInput, mapFn: function, thisArg: any, scheduler: Scheduler):
+            Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .create()</span>
+            <strong>Description:</strong> Create an observable with given subscription function.<br>
+            <strong>signature:</strong> create(subscribe: function)
+          </li>
+
+          <li>
+            <span class="operator-title"> .fromEvent()</span>
+            <strong>Description:</strong> Turn event into observable sequence.<br>
+            <strong>Signature:</strong> fromEvent(target: EventTargetLike, eventName: string, selector: function):
+            Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .interval(x ms)</span>
+            <strong>Description:</strong> Emit numbers in sequence based on provided timeframe.<br>
+            <strong>Signature:</strong> interval(period: number, scheduler: Scheduler): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .range(x,y)</span>
+            <strong>Description:</strong> Emit numbers in provided range in sequence.<br>
+            <strong>Signature:</strong> range(start: number, count: number, scheduler: Scheduler): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .timer()</span>
+            <strong>Description:</strong> After given duration, emit numbers in sequence every specified duration.<br>
+            <strong>Signature:</strong> timer(initialDelay: number | Date, period: number, scheduler: Scheduler):
+            Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .throw(new Error('Error'))</span>
+            <strong>Description:</strong> Emit error on subscription.<br>
+            <strong>Signature:</strong> throw(error: any, scheduler: Scheduler): Observable
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="category">
+        <strong><u>02-Combining:</u></strong>
+        <ul>
+
+          <li>
+            <span class="operator-title"> .combineLatest()</span>
+            <strong>Description:</strong> When any observable emits a value, emit the latest value from each.<br>
+            <strong>signature:</strong> combineLatest(observables: ...Observable, project: function): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .zip()</span>
+            <strong>Description:</strong> After all observables emit, emit all values with the same index as an
+            array<br>
+            <strong>signature:</strong> zip(observables: *): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .forkJoin()</span>
+            <strong>Description:</strong> When all observables complete, emit the last emitted value from each.<br>
+            <strong>signature:</strong> forkJoin(...args, selector : function): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .race(Obs1, Obs2)</span>
+            <strong>Description:</strong> Returns the observable to emit first.<br>
+            <strong>signature:</strong> race(observables: ...Observable): Observable
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="category">
+        <strong><u>03-Merging - linear:</u></strong>
+        <ul>
+
+          <li>
+            <span class="operator-title"> .map()</span>
+            <strong>Description:</strong> Apply projection with each value from source.<br>
+            <strong>signature:</strong> map(project: Function, thisArg: any): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .merge()</span>
+            <strong>Description:</strong> Turn multiple observables into a single observable.<br>
+            <strong>signature:</strong> merge(input: Observable): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .concat()</span>
+            <strong>Description:</strong> Subscribe to observables in order as previous completes, emit values.<br>
+            <strong>signature:</strong> concat(observables: ...*): Observable
+          </li>
+
+        </ul>
+      </div>
     </div>
-
-    <div class="category">
-      <strong><u>02-Combining:</u></strong>
-      <ul>
-        <li>.combineLatest()</li>
-        <li>.zip()</li>
-        <li>.forkJoin()</li>
-        <li>.race(Obs1, Obs2)</li>
-      </ul>
-    </div>
-
-    <div class="category">
-      <strong><u>03-Merging - linear:</u></strong>
-      <ul>
-        <li>.map()</li>
-        <li>.merge()</li>
-        <li>.concat()</li>
-      </ul>
-    </div>
-
-
-
-  </div>
 
     <div class="categories-column">
 
@@ -42,37 +127,116 @@
         <br>
         double operation operators with flattening
         <ul>
-          <li>.mergeMap()</li>
-          <li>.concatMap()</li>
-          <li>.switchMap()</li>
+          <li>
+            <span class="operator-title"> .mergeMap()</span>
+            <strong>Description:</strong> Returns the observable to emit first.<br>
+            <strong>signature:</strong> mergeMap(project: function: Observable, resultSelector: function: any,
+            concurrent:
+            number): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .concatMap()</span>
+            <strong>Description:</strong> Map values to inner observable, subscribe and emit in order.<br>
+            <strong>signature:</strong> concatMap(project: function, resultSelector: function): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .switchMap()</span>
+            <strong>Description:</strong> Map to observable, complete previous inner observable, emit values.<br>
+            <strong>signature:</strong> switchMap(project: function: Observable, resultSelector: function(outerValue,
+            innerValue, outerIndex, innerIndex): any): Observable
+          </li>
+
         </ul>
       </div>
 
       <div class="category">
         <strong><u>05-Share/Replay:</u></strong>
         <ul>
-          <li>.share()</li>
-          <li>.shareReplay()</li>
-          <li>.publish()</li>
-          <li>.connect()</li>
-          <li>.publishReplay()</li>
-          <li>.refCount()</li>
+          <li>
+            <span class="operator-title"> .share()</span>
+            <strong>Description:</strong> Share source among multiple subscribers.<br>
+            <strong>signature:</strong> share(): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .shareReplay()</span>
+            <strong>Description:</strong> Share source among multiple subscribers with a ReplaySubject.<br>
+            <strong>signature:</strong> shareReplay(count: number): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .publish()</span>
+            <strong>Description:</strong> Share source and make hot (individually) by calling .connect().<br>
+            <strong>signature:</strong> publish() : ConnectableObservable
+          </li>
+
+          <li>
+            <span class="operator-title"> .publishReplay()</span>
+            <strong>Description:</strong> Share source among multiple subscribers.<br>
+            <strong>signature:</strong> share(): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .refCount()</span>
+            <strong>Description:</strong> .<br>
+            <strong>signature:</strong> refCount(): Observable
+          </li>
+
         </ul>
       </div>
 
       <div class="category">
         <strong><u>06-Filtering:</u></strong>
         <ul>
-          <li>.filter()</li>
-          <li>.first()</li>
-          <li>.take(n)</li>
-          <li>.last(n)</li>
-          <li>.takeUntil(Observable)</li>
-          <li>.takeWhile(function)</li>
+
+          <li>
+            <span class="operator-title"> .filter(func)</span>
+            <strong>Description:</strong> Emit values that pass the provided condition.<br>
+            <strong>Signature:</strong> filter(select: Function, thisArg: any): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .first()</span>
+            <strong>Description:</strong> Emit the first value or first to pass provided expression.<br>
+            <strong>Signature:</strong> first(predicate: function, select: function)
+          </li>
+
+          <li>
+            <span class="operator-title"> .take(n)</span>
+            <strong>Description:</strong> Emit provided number of values before completing.<br>
+            <strong>Signature:</strong> take(count: number): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .takeLast(n)</span>
+            <strong>Description:</strong> Emit the last values emitted from source on completion, based on provided
+            number.<br>
+            <strong>Signature:</strong> takeLast(count: number): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .last(n)</span>
+            <strong>Description:</strong> Emit the last value emitted from source on completion, based on provided
+            expression.
+            <strong>Signature:</strong> last(predicate: function): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .takeUntil(Observable)</span>
+            <strong>Description:</strong> Emit values until provided observable emits.<br>
+            <strong>Signature:</strong> takeUntil(notifier: Observable): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .takeWhile(function)</span>
+            <strong>Description:</strong> Emit values until provided expression is false.<br>
+            <strong>Signature:</strong> takeWhile(predicate: function(value, index): boolean): Observable
+          </li>
 
         </ul>
       </div>
-
     </div>
 
     <div class="categories-column">
@@ -80,21 +244,72 @@
       <div class="category">
         <strong><u>07-Other:</u></strong>
         <ul>
-          <li>.do()</li>
-          <li>.defaultIfEmpty()</li>
-          <li>.debounce()</li>
-          <li>.debounceTime()</li>
-          <li>.throttle()</li>
-          <li>.throttleTime()</li>
-          <li>.distinctUntilChanged()</li>
-          <li>.retry(n)</li>
-          <li>.retryWhen()</li>
-          <li>.range(x,y)</li>
-          <li>.throw(x,y)</li>
+          <li>
+            <span class="operator-title"> .do()</span>
+            <strong>Description:</strong> Transparently perform actions or side-effects, such as logging.<br>
+            <strong>Signature:</strong> do(nextOrObserver: function, error: function, complete: function): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .defaultIfEmpty()</span>
+            <strong>Description:</strong> Emit given value if nothing is emitted before completion.<br>
+            <strong>Signature:</strong> defaultIfEmpty(defaultValue: any): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .debounce()</span>
+            <strong>Description:</strong> Discard emitted values that take less than the specified time, based on
+            selector
+            function, between output.<br>
+            <strong>Signature:</strong> debounce(durationSelector: function): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .debounceTime()</span>
+            <strong>Description:</strong> Discard emitted values that take less than the specified time between
+            output.<br>
+            <strong>Signature:</strong> debounceTime(dueTime: number, scheduler: Scheduler): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .throttle()</span>
+            <strong>Description:</strong> Emit value only when duration, determined by provided function, has
+            passed.<br>
+            <strong>Signature:</strong> throttle(durationSelector: function(value): Observable | Promise): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .throttleTime()</span>
+            <strong>Description:</strong> Emit latest value when specified duration has passed.<br>
+            <strong>Signature:</strong> throttleTime(duration: number, scheduler: Scheduler): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .distinctUntilChanged()</span>
+            <strong>Description:</strong> Emit values until provided observable emits.<br>
+            <strong>Signature:</strong> takeUntil(notifier: Observable): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .startWith()</span>
+            <strong>Description:</strong> Emit given value first.<br>
+            <strong>Signature:</strong> startWith(an: Values): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .retry(n)</span>
+            <strong>Description:</strong> Emit values until provided observable emits.<br>
+            <strong>Signature:</strong> takeUntil(notifier: Observable): Observable
+          </li>
+
+          <li>
+            <span class="operator-title"> .retryWhen()</span>
+            <strong>Description:</strong> Emit values until provided observable emits.<br>
+            <strong>Signature:</strong> takeUntil(notifier: Observable): Observable
+          </li>
+
         </ul>
       </div>
-
     </div>
-
   </div>
 </div>

@@ -1,9 +1,95 @@
-<div class="margin-top-10px">
-  <strong>How to use:</strong>
-  <ul>
-    <li>Create an array by adding values and pressing the <strong>Add to Array</strong> or the Enter key</li>
-    <li>Process the created array using the <strong>Process</strong> button</li>
-  </ul>
+<div class="page-header">
+  <div class="column margin-top-10px">
+    <strong>How to use for .of() and .from() operators:</strong>
+    <ul>
+      <li>Create an array by adding values and pressing the <strong>Add to Array</strong> or the Enter key</li>
+      <li>Process the created array using the <strong>Process</strong> button</li>
+    </ul>
+
+    <strong>Details for the rest of the operators:</strong>
+    Mostly all the observables are forced to tick once a second or so using either .concatMap() or zip().
+    <ul>
+      <li>.create(even numbers) - will generate the even numbers every 2 seconds, internally it increases from 1 to 1
+        and
+        considers only the values that divide exactly by 2
+      </li>
+      <li>.fromEvent(button.nativeElement, event) - will create an event every time the button is clicked, returning
+        "button clicked " + new Date()
+      </li>
+      <li>.interval() - will generate consecutive numbers every 2 seconds, indefinitely</li>
+      <li>.range() - is merged with concatMap() in order to tick every 1 second ( .concatMap((val) =>
+        Observable.timer(1000).map(() => val)) )
+      </li>
+      <li>.timer() - if 2nd parameter is missing, it will tick only once after the duration represented by the 1st
+        parameter. If 2nd parameter is present it will indefinitely tick after the duration represented by it, also
+        considering the 1st parameter as an initial delay. <br>
+        In the demo below it will emit consecutive numbers starting from 0, with an initial delay of 5 seconds, each 1.5
+        seconds.
+      </li>
+      <li>.throw() - will throw an error after 5 seconds. See dev tools. The thrown error is not displayed within the
+        template even if the observable is displayed directly in the template using async pipe, .
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="column font-small flex-width-33">
+    <ul>
+
+      <li>
+        <span class="operator-title">.of()</span>
+        <strong>Description:</strong> Emit variable amount of values in a sequence.<br>
+        <strong>signature:</strong> of(...values, scheduler: Scheduler): Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .from() (does also what .fromPromise() does)</span>
+        <strong>Description:</strong> Turn an array, promise, or iterable into an observable.<br>
+        <strong>signature:</strong> from(ish: ObservableInput, mapFn: function, thisArg: any, scheduler: Scheduler):
+        Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .create()</span>
+        <strong>Description:</strong> Create an observable with given subscription function.<br>
+        <strong>signature:</strong> create(subscribe: function)
+      </li>
+
+      <li>
+        <span class="operator-title"> .fromEvent()</span>
+        <strong>Description:</strong> Turn event into observable sequence.<br>
+        <strong>Signature:</strong> fromEvent(target: EventTargetLike, eventName: string, selector: function):
+        Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .interval(x ms)</span>
+        <strong>Description:</strong> Emit numbers in sequence based on provided timeframe.<br>
+        <strong>Signature:</strong> interval(period: number, scheduler: Scheduler): Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .range(x,y)</span>
+        <strong>Description:</strong> Emit numbers in provided range in sequence.<br>
+        <strong>Signature:</strong> range(start: number, count: number, scheduler: Scheduler): Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .timer()</span>
+        <strong>Description:</strong> After given duration, emit numbers in sequence every specified duration.<br>
+        <strong>Signature:</strong> timer(initialDelay: number | Date, period: number, scheduler: Scheduler):
+        Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .throw(new Error('Error'))</span>
+        <strong>Description:</strong> Emit error on subscription.<br>
+        <strong>Signature:</strong> throw(error: any, scheduler: Scheduler): Observable
+      </li>
+
+    </ul>
+  </div>
+
 </div>
 
 <div class="flex-row-container">
@@ -17,17 +103,19 @@
       <button mat-raised-button color="accent" (click)="process()">Process Array</button>
     </div>
     Test array:
-    <div>[ {{theArray.join(', ')}} ]</div>
+    <div>
+      [ {{theArray.join(', ')}} ]
+    </div>
   </div>
 
 </div>
 <br>
 
 
-<div class="flex-row-container">
+<div class="flex-row-container border-top padding-top-10px min-height200">
 
   <div class="column">
-    Observable.of([ {{theArray.join(', ')}} ]):
+    <strong>Observable.of([ {{theArray.join(', ')}} ]):</strong>
     <br>
     Output:
     <div class="flex-row">
@@ -38,16 +126,65 @@
   </div>
 
   <div class="column">
-    Observable.of(...[ {{theArray.join(', ')}} ]):
+    <strong>Observable.of(...[ {{theArray.join(', ')}} ]):</strong>
     <br>
     Output: {{ obsOfSpread$ | async }}
 
   </div>
 
   <div class="column">
-    Observable.from([ {{theArray.join(', ')}} ]):
+    <strong>Observable.from([ {{theArray.join(', ')}} ]):</strong>
     <br>
     Output: {{obsFrom$ | async}}
   </div>
+
+</div>
+
+
+<div class="flex-row-container border-top margin-top-10px padding-top-10px">
+
+  <div class="column">
+    <strong>.create(even numbers):</strong>
+    <div class="flex-row">
+      Output: {{obsCreated$ | async}}
+    </div>
+  </div>
+
+  <div class="column">
+    <strong>Observable.fromEvent(button.nativeElement, 'click']):</strong> {{ obsFromEvent$ | async }}
+    <br>
+    <div>
+      <button mat-raised-button #fromEvent>Button</button>
+    </div>
+  </div>
+
+  <div class="column">
+    <strong>Observable.interval(duration):</strong>
+    <br>
+    Output: {{obsInterval$ | async}}
+  </div>
+
+  <div class="column">
+    <strong>Observable.range(start, end):</strong>
+    <br>
+    Output: {{obsRange$ | async}}
+  </div>
+
+</div>
+
+
+<div class="flex-row-container border-top margin-top-10px padding-top-10px">
+
+  <div class="column">
+    <strong>.timer(5000, 1500):</strong>
+    <div class="flex-row">
+      Output: {{obsTimer$ | async}}
+    </div>
+  </div>
+
+  <div class="column">
+    <strong>Observable.throw(new Error(...)):</strong> {{ obsThrow$ | async }}
+  </div>
+
 
 </div>

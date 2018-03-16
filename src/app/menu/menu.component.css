@@ -3,10 +3,10 @@
   flex-flow: row wrap;
   align-items: flex-start;
   align-content: flex-start;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex: 1 1 auto;
 }
 
 .flex-row > button {
-  margin-top: 5px;
+  margin: 5px 5px 0 0;
 }

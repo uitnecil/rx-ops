@@ -1,12 +1,67 @@
-<div class="margin-top-10px">
-  <strong>How to use:</strong>
-  <ul>
-    <li>Enter the desired length of the Array and press the <strong>Process</strong> button</li>
-    <li>After Process has been used once page needs to be refreshed in order for all operators to be re-instantiated</li>
-    <li>Press <strong>Complete Source$</strong> to be able to view the results from last() and takeLast(n) operators which require the source to complete</li>
-  </ul>
+<div class="page-header">
+  <div class="column margin-top-10px">
+    <strong>How to use:</strong>
+    <ul>
+      <li>Enter the desired length of the Array and press the <strong>Process</strong> button</li>
+      <li>After Process has been used once page needs to be refreshed in order for all operators to be re-instantiated
+      </li>
+      <li>Press <strong>Complete Source$</strong> to be able to view the results from last() and takeLast(n) operators
+        which require the source to complete
+      </li>
+    </ul>
+    <!--<strong>Signatures:</strong>-->
+    <!--<ul>-->
+      <!--<li>filter(select: Function, thisArg: any): Observable</li>-->
+      <!--<li>first(predicate: function, select: function)</li>-->
+      <!--<li>take(count: number): Observable</li>-->
+      <!--<li>takeLast(count: number): Observable</li>-->
+      <!--<li>last(count: number): Observable</li>-->
+      <!--<li>takeUntil(notifier: Observable): Observable</li>-->
+      <!--<li>takeWhile(predicate: function(value, index): boolean): Observable</li>-->
+    <!--</ul>-->
+  </div>
+  <div class="column font-small flex-width-33">
+    <ul>
+      <li>
+        <span class="operator-title"> .filter(func)</span>
+        <strong>Description:</strong> Emit values that pass the provided condition.<br>
+        <strong>Signature:</strong> filter(select: Function, thisArg: any): Observable
+      </li>
+      <li>
+        <span class="operator-title"> .first()</span>
+        <strong>Description:</strong> Emit the first value or first to pass provided expression.<br>
+        <strong>Signature:</strong> first(predicate: function, select: function)
+      </li>
+      <li>
+        <span class="operator-title"> .take(n)</span>
+        <strong>Description:</strong> Emit provided number of values before completing.<br>
+        <strong>Signature:</strong> take(count: number): Observable
+      </li>
+      <li>
+        <span class="operator-title"> .takeLast(n)</span>
+        <strong>Description:</strong> Emit the last values emitted from source on completion, based on provided
+        number.<br>
+        <strong>Signature:</strong> takeLast(count: number): Observable
+      </li>
+      <li>
+        <span class="operator-title"> .last(n)</span>
+        <strong>Description:</strong> Emit the last value emitted from source on completion, based on provided
+        expression.
+        <strong>Signature:</strong> last(predicate: function): Observable
+      </li>
+      <li>
+        <span class="operator-title"> .takeUntil(Observable)</span>
+        <strong>Description:</strong> Emit values until provided observable emits.<br>
+        <strong>Signature:</strong> takeUntil(notifier: Observable): Observable
+      </li>
+      <li>
+        <span class="operator-title"> .takeWhile(function)</span>
+        <strong>Description:</strong> Emit values until provided expression is false.<br>
+        <strong>Signature:</strong> takeWhile(predicate: function(value, index): boolean): Observable
+      </li>
+    </ul>
+  </div>
 </div>
-
 <div class="flex-row-container">
   <div class="column">
     <div>

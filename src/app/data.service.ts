@@ -51,7 +51,7 @@ export class DataService implements OnDestroy {
   //   console.log(`WS connected`, evt);
   // }
 
-  static onError(evt): void {
+  onError(evt): void {
     console.log(evt);
   }
 

@@ -1,17 +1,35 @@
-<div class="margin-top-10px">
-  <strong>How to use:</strong>
-  <ul>
-    <li><strong>Map</strong> (static method/ instance method): Offers the possibility for each value of the stream to
-      be altered based on a function.
-    </li>
-    <li><strong>Concat</strong> (static method/ instance method): Concatenates the output of two streams. Values from
-      first stream are returned first and once it is completed, the second stream values are returned. If first stream
-      is infinite, the values from the second stream will never be emitted.
-    </li>
-    <li><strong>Merge</strong> (static method/ instance method): Merges the values between two streams. Values are
-      returned individually in the order they were emitted by each stream.
-    </li>
-  </ul>
+<div class="page-header">
+  <div class="column margin-top-10px">
+    <strong>How to use:</strong>
+    <ul>
+      <li><strong>Map</strong>: static method/ instance method.
+      </li>
+      <li><strong>Concat</strong> (static method/ instance method): Concatenates two streams. If first stream
+        is infinite, the values from the second stream will never be emitted.
+      </li>
+      <li><strong>Merge</strong>: static method/ instance method
+      </li>
+    </ul>
+  </div>
+  <div class="column font-small flex-width-33">
+    <ul>
+      <li>
+        <span class="operator-title"> .map()</span>
+        <strong>Description:</strong> Apply projection with each value from source.<br>
+        <strong>signature:</strong> map(project: Function, thisArg: any): Observable
+      </li>
+      <li>
+        <span class="operator-title"> .merge()</span>
+        <strong>Description:</strong> Turn multiple observables into a single observable.<br>
+        <strong>signature:</strong> merge(input: Observable): Observable
+      </li>
+      <li>
+        <span class="operator-title"> .concat()</span>
+        <strong>Description:</strong> Subscribe to observables in order as previous completes, emit values.<br>
+        <strong>signature:</strong> concat(observables: ...*): Observable
+      </li>
+    </ul>
+  </div>
 </div>
 
 <div class="flex-row-container">

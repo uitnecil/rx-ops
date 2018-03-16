@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostBinding, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import 'rxjs/add/operator/combineLatest';
@@ -17,6 +17,7 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class Combining02Component implements OnInit, OnDestroy {
   // @HostBinding('class') margin = 'style-component';
+
 
   private unsubscribeAll: Subscription = new Subscription();
 

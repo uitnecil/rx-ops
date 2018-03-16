@@ -4,7 +4,13 @@ More details at: https://tolikcode.github.io/post/rxjsMap/
 
 <div class="flex-row-container">
   <div class="column">
-    <strong><u>mergeMap:</u></strong>
+    <div class="definition">
+      <span class="operator-title"> .mergeMap()</span>
+      <strong>Description:</strong> Returns the observable to emit first.<br>
+      <strong>signature:</strong> mergeMap(project: function: Observable, resultSelector: function: any,
+      concurrent:
+      number): Observable
+    </div>
     <ul>
       <li>mergeMap emits items into the resulting Observable just as they are emitted from inner Observables. It doesn’t wait for anything.</li>
       <li>mergeMap doesn’t preserve the order from outer Observable. Collections of results may interleave based on response timings.</li>
@@ -13,7 +19,11 @@ More details at: https://tolikcode.github.io/post/rxjsMap/
   </div>
 
   <div class="column">
-    <strong><u>concatMap:</u></strong>
+    <div class="definition">
+      <span class="operator-title"> .concatMap()</span>
+      <strong>Description:</strong> Map values to inner observable, subscribe and emit in order.<br>
+      <strong>signature:</strong> concatMap(project: function, resultSelector: function): Observable
+    </div>
     <ul>
       <li>concatMap waits for inner Observable to complete before taking items from the next inner Observable.</li>
       <li>concatMap does preserve the order from outer Observable. Collections of results don’t interleave.</li>
@@ -22,7 +32,12 @@ More details at: https://tolikcode.github.io/post/rxjsMap/
   </div>
 
   <div class="column">
-    <strong><u>switchMap:</u></strong>
+    <div class="definition">
+      <span class="operator-title"> .switchMap()</span>
+      <strong>Description:</strong> Map to observable, complete previous inner observable, emit values.<br>
+      <strong>signature:</strong> switchMap(project: function: Observable, resultSelector: function(outerValue,
+      innerValue, outerIndex, innerIndex): any): Observable
+    </div>
     <ul>
       <li>switchMap emits items only from the most recent inner Observable.</li>
       <li>switchMap cancels previous inner Observables when a new inner Observable appears. Items of inner Observable that were emitted after the Observable was canceled will be lost (not included in the resulting Observable).

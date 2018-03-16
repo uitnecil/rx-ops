@@ -17,9 +17,9 @@ body {
   width: 30%;
 }
 
-.min-height30 {
+.min-height200 {
   /*min-height: 30%;*/
-  min-height: 20vh;
+  min-height: 200px;
 }
 
 .width25 {
@@ -96,4 +96,76 @@ body {
 
 .margin-top-10px {
   margin-top: 10px;
+}
+
+.padding-top-10px {
+  padding-top: 10px;
+}
+
+.border-top {
+  border-top: 1px solid gray;
+}
+
+
+/* Home page styles - START */
+
+.categories-row {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  align-content: flex-start;
+  justify-content: flex-start;
+
+}
+.categories-column {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  align-content: flex-start;
+  justify-content: flex-start;
+
+  margin: 0 10px 0 0;
+  padding: 0 10px 0 0;
+  border-right: 1px solid gray;
+  width: 33vw;
+
+}
+
+.categories-column:last-child {
+  border-right: 0;
+}
+
+.category {
+  margin-top: 10px;
+  padding: 10px;
+  border-top: 1px solid gray;
+}
+
+
+.operator-title {
+  display: block;
+  font-weight: bold;
+  color: #3F51B5;
+}
+
+/* Home page styles - END */
+
+
+.page-header {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: space-evenly;
+}
+
+.page-header > * {
+  flex: 1 1 45%;
+  border: 0;
+}
+
+.page-header > .flex-width-33 {
+  flex: 0 1 33%;
+  background-color: lightgray;
+  border-radius: 4px;
 }

@@ -55,13 +55,6 @@ export class Filtering06Component implements OnInit, OnDestroy, AfterViewInit {
 
   public theArray: any[] = [];
 
-  static generateArray(length: number) {
-    // just some sample values
-    const tempLength = (length >= 5) && (length <= 50) ? length : 10;
-    return Array.from({length: tempLength}, (v, i) => i + 1);
-  }
-
-
   constructor() {
     // push every second a value down the stream
     this.source$ = this.valueGenerator
@@ -88,7 +81,6 @@ export class Filtering06Component implements OnInit, OnDestroy, AfterViewInit {
 
     this.takeWhile$ = this.source$
       .takeWhile(() => this.takeWhilePressed === true);
-    // .takeWhile((val: number) => val > 4 && val < 6);
 
   }
 
@@ -105,7 +97,6 @@ export class Filtering06Component implements OnInit, OnDestroy, AfterViewInit {
     Observable.fromEvent(this.takeWhileButton._elementRef.nativeElement, 'click')
       .subscribe(() => {
           this.takeWhilePressed = !this.takeWhilePressed;
-          // console.log(`takeWhilePressed: `, this.takeWhilePressed);
         },
         // error
         console.log,
@@ -119,6 +110,13 @@ export class Filtering06Component implements OnInit, OnDestroy, AfterViewInit {
   process(val: number) {
     this.valueGenerator.next(this.theArray = this.generateArray(val));
   }
+
+  generateArray(length: number) {
+    // just some sample values
+    const tempLength = (length >= 5) && (length <= 50) ? length : 10;
+    return Array.from({length: tempLength}, (v, i) => i + 1);
+  }
+
 
   logObs() {
     const sub1 = this.filter$.subscribe(val => console.log(`first$: ${val}`), console.log, () => {

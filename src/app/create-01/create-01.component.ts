@@ -1,18 +1,26 @@
-import {Component, HostBinding, OnInit} from '@angular/core';
+import {AfterViewInit, Component, HostBinding, OnInit, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/observable/timer';
+import 'rxjs/add/observable/range';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/empty';
+import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/zip';
+import {MatButton} from '@angular/material';
 
 @Component({
   selector: 'app-create-01',
   templateUrl: './create-01.component.html',
   styleUrls: ['./create-01.component.css']
 })
-export class Create01Component implements OnInit {
-  @HostBinding('class') margin = 'style-component';
+export class Create01Component implements OnInit, AfterViewInit {
+  // @HostBinding('class') margin = 'style-component';
+  @ViewChild('fromEvent') fromEvent: MatButton;
 
   public theArray: any[] = [];
 
@@ -32,6 +40,13 @@ export class Create01Component implements OnInit {
 
   public obsFrom$: Observable<any> = this.source$
     .concatMap((val: any[]) =>  Observable.from(val).concatMap(arrayItem => Observable.timer(1000).map(() => arrayItem)));
+
+  public obsCreated$: Observable<any>;
+  public obsFromEvent$: Observable<any>;
+  public obsInterval$: Observable<any>;
+  public obsRange$: Observable<any>;
+  public obsTimer$: Observable<any>;
+  public obsThrow$: Observable<any>;
 
   constructor() {
     // const arr = ['as', 'dsd', 'fd', 'asd'];
@@ -68,6 +83,41 @@ export class Create01Component implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+
+    // create infinite even numbers
+    this.obsCreated$ = Observable.create(observer => {
+      let val = 0;
+      const interval = setInterval(() => {
+          if (val % 2 === 0) {
+            observer.next(val);
+          }
+          val++;
+        }
+        , 1000);
+      return () => clearInterval(interval);
+    });
+
+    this.obsFromEvent$ = Observable.fromEvent(this.fromEvent._elementRef.nativeElement, 'click')
+      .map(() => `Button clicked: ${new Date()}`);
+
+    this.obsInterval$ = Observable.interval(2000);
+
+    this.obsRange$ = Observable.range(25, 35)
+      .concatMap((val) => Observable.timer(1000).map(() => val));
+      // or using zip
+      // .zip(Observable.interval(1000))
+      // .map(([val, ]) => val);
+
+    // this.obsRange$.subscribe(v => console.log(v));
+
+    this.obsTimer$ = Observable.timer(5000, 1500);
+
+    // this.obsThrow$ = Observable.throw(new Error('Custom Error')).zip(Observable.timer(5000), ([a, b]) => a);
+    this.obsThrow$ = Observable.timer(5000).mergeMap(() => Observable.throw(new Error('Custom Error triggered with a delay of 5 seconds')));
+
   }
 
   process() {
