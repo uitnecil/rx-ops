@@ -77,7 +77,7 @@ export class DataService implements OnDestroy {
     };
     const combined$ = this.wsOpen$.combineLatest(this.outgoingMessage, combineThem)
       .subscribe(([ev, msg]) => {
-        if (this.socket.readyState === WebSocket.OPEN) {
+        if (this.socket && this.socket.readyState === WebSocket.OPEN) {
           this.socket.send(msg);
           // console.log(`Sent`, msg);
         }
