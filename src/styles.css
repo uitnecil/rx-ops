@@ -6,6 +6,7 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
+
 .border-it {
   /*display: flex;*/
   margin: 10px;
@@ -17,9 +18,12 @@ body {
   width: 30%;
 }
 
-.min-height200 {
-  /*min-height: 30%;*/
-  min-height: 200px;
+.min-height190 {
+  min-height: 190px;
+}
+
+.min-height500 {
+  min-height: 500px;
 }
 
 .width25 {
@@ -69,30 +73,14 @@ body {
   padding: 10px;
 }
 
-/*.column-20 {*/
-  /*display: flex;*/
-  /*flex-flow: column nowrap;*/
-  /*align-items: stretch;*/
-  /*align-content: stretch;*/
-  /*justify-content: center;*/
-  /*flex: 0 0 20%;*/
-  /*!*min-width: 100px;*!*/
-
-  /*border-width: 0 1px 0 0;*/
-  /*border-style: solid;*/
-  /*border-color: gray;*/
-  /*padding: 10px;*/
-/*}*/
-
-
 
 .column:last-child {
   border-width: 0;
 }
 
-/*.column mat-form-field {*/
-/*padding: 20px;*/
-/*}*/
+.column-simple:last-child {
+  border: 0;
+}
 
 .margin-top-10px {
   margin-top: 10px;
@@ -157,10 +145,12 @@ body {
   align-items: flex-start;
   align-content: flex-start;
   justify-content: space-evenly;
+  flex-basis: 100%;
+  min-height: 100%;
 }
 
 .page-header > * {
-  flex: 1 1 45%;
+  flex: 1 1 100%;
   border: 0;
 }
 
@@ -168,4 +158,41 @@ body {
   flex: 0 1 33%;
   background-color: lightgray;
   border-radius: 4px;
+}
+
+.close-sign {
+  display: inline-block;
+  font-size: large;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  user-select: none;
+}
+
+.close-sign:hover {
+  cursor: pointer;
+}
+
+.more-details {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.padding-10px {
+  padding-right: 10px;
+}
+
+.log-holder {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: space-evenly;
+
+  font-size: medium;
+}
+
+.log-holder > .column {
+  flex: 1 1 32%;
 }

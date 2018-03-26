@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostBinding, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 
@@ -19,7 +19,6 @@ import {MatButton} from '@angular/material';
   styleUrls: ['./create-01.component.css']
 })
 export class Create01Component implements OnInit, AfterViewInit {
-  // @HostBinding('class') margin = 'style-component';
   @ViewChild('fromEvent') fromEvent: MatButton;
 
   public theArray: any[] = [];
@@ -28,9 +27,11 @@ export class Create01Component implements OnInit, AfterViewInit {
   // public source$ = this.dataGenerator$.mergeMap((arr: any[]) => Observable.from(arr)
   //   .concatMap(arrayItem => Observable.timer(1000).map(() => arrayItem)));
 
-  public obsOf: any[] = [];
-  public obsOfSpread: any[] = [];
-  public obsFrom: any[] = [];
+  /*
+    public obsOf: any[] = [];
+    public obsOfSpread: any[] = [];
+    public obsFrom: any[] = [];
+  */
 
   public obsOf$: Observable<any> = this.source$
     .concatMap((val: any[]) => Observable.of(val).concatMap(arrayItem => Observable.timer(1000).map(() => arrayItem)));
@@ -47,6 +48,10 @@ export class Create01Component implements OnInit, AfterViewInit {
   public obsRange$: Observable<any>;
   public obsTimer$: Observable<any>;
   public obsThrow$: Observable<any>;
+
+  // used to force refresh the pipes on the template
+  public forcePipeRefresh = 1;
+  public forcePipeArrayRefresh = 1;
 
   constructor() {
     // const arr = ['as', 'dsd', 'fd', 'asd'];
@@ -118,17 +123,24 @@ export class Create01Component implements OnInit, AfterViewInit {
     // this.obsThrow$ = Observable.throw(new Error('Custom Error')).zip(Observable.timer(5000), ([a, b]) => a);
     this.obsThrow$ = Observable.timer(5000).mergeMap(() => Observable.throw(new Error('Custom Error triggered with a delay of 5 seconds')));
 
+    // just change a number each half a second to force the pipe to refresh -- probably too expensive
+    // Observable.interval(100)
+    //   .map(() => this.forcePipeRefresh *= (-1))
+    //   .subscribe(console.log);
+
   }
 
   process() {
     this.source$.next(this.theArray);
+
+    // force pipe refresh
+    this.forcePipeRefresh *= (-1);
   }
 
   addToArray(value) {
     this.theArray.push(value);
-  }
 
-  isArray(val: any) {
-    return (val instanceof Array);
+    // force pipe refresh
+    this.forcePipeArrayRefresh *= (-1);
   }
 }

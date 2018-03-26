@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  align-content: stretch;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.container > * {
+  flex: 1 1 100%;
+  border-bottom: 1px solid gray;
+  min-height: 20vh;
+}
+
+.container > *:first-child {
+  /*margin-top: 10px;*/
+  border-top: 1px solid gray
+}

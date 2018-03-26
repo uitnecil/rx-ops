@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostBinding, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/concatMap';
@@ -22,7 +22,6 @@ import {Subscription} from 'rxjs/Subscription';
   styleUrls: ['./filtering-06.component.css']
 })
 export class Filtering06Component implements OnInit, OnDestroy, AfterViewInit {
-  @HostBinding('class') margin = 'style-component';
 
   @ViewChild('takeUntil') takeUntilButton: MatButton;
   @ViewChild('takeWhile') takeWhileButton: MatButton;
@@ -54,6 +53,8 @@ export class Filtering06Component implements OnInit, OnDestroy, AfterViewInit {
 
 
   public theArray: any[] = [];
+
+  public forcePipeRefresh = 1;
 
   constructor() {
     // push every second a value down the stream
@@ -117,6 +118,10 @@ export class Filtering06Component implements OnInit, OnDestroy, AfterViewInit {
     return Array.from({length: tempLength}, (v, i) => i + 1);
   }
 
+  completevalueGeneratorSubject(): void {
+    this.valueGenerator.next([-1]);
+    this.valueGenerator.complete();
+  }
 
   logObs() {
     const sub1 = this.filter$.subscribe(val => console.log(`first$: ${val}`), console.log, () => {

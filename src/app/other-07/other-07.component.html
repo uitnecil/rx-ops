@@ -1,0 +1,154 @@
+<mat-drawer-container class="min-height500  margin-top-10px" autosize>
+  <mat-drawer #drawer class="font-small" mode="over">
+    <div class="close-sign" (click)="drawer.toggle()">X</div>
+    <h4>Operator Details</h4>
+    <ul>
+      <li>
+        <span class="operator-title"> .scan()</span>
+        <b>Description:</b> Reduce over time..<br>
+        <b>Signature:</b> scan(accumulator: function, seed: any): Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .do()</span>
+        <b>Description:</b> Transparently perform actions or side-effects, such as logging.<br>
+        <b>Signature:</b> do(nextOrObserver: function, error: function, complete: function): Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .defaultIfEmpty()</span>
+        <b>Description:</b> Emit given value if nothing is emitted before completion.<br>
+        <b>Signature:</b> defaultIfEmpty(defaultValue: any): Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .debounce()</span>
+        <b>Description:</b> Discard emitted values that take less than the specified time, based on
+        selector
+        function, between output.<br>
+        <b>Signature:</b> debounce(durationSelector: function): Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .debounceTime()</span>
+        <b>Description:</b> Discard emitted values that take less than the specified time between
+        output.<br>
+        <b>Signature:</b> debounceTime(dueTime: number, scheduler: Scheduler): Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .throttle()</span>
+        <b>Description:</b> Emit value only when duration, determined by provided function, has
+        passed.<br>
+        <b>Signature:</b> throttle(durationSelector: function(value): Observable | Promise): Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .throttleTime()</span>
+        <b>Description:</b> Emit latest value when specified duration has passed.<br>
+        <b>Signature:</b> throttleTime(duration: number, scheduler: Scheduler): Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .distinctUntilChanged()</span>
+        <b>Description:</b> Emit values until provided observable emits.<br>
+        <b>Signature:</b> takeUntil(notifier: Observable): Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .startWith()</span>
+        <b>Description:</b> Emit given value first.<br>
+        <b>Signature:</b> startWith(an: Values): Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .retry(n)</span>
+        <b>Description:</b> Emit values until provided observable emits.<br>
+        <b>Signature:</b> takeUntil(notifier: Observable): Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .retryWhen()</span>
+        <b>Description:</b> Emit values until provided observable emits.<br>
+        <b>Signature:</b> takeUntil(notifier: Observable): Observable
+      </li>
+
+    </ul>
+  </mat-drawer>
+
+  <div class="page-header">
+
+    <div class="more-details">
+      <button type="button" mat-raised-button (click)="drawer.toggle()">
+        Details
+      </button>
+    </div>
+
+    <div class="column margin-top-10px">
+      <b>How to use:</b>
+      <ul>
+        <li>
+
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+
+
+  <div class="flex-row-container">
+    <div class="column">
+      Test data streams:
+      <div>Stream 1 (Obs1): {{dataStream1 | asArray}} - ticks every second</div>
+      <div>Stream 2 (Obs2): {{dataStream2 | asArray}} - ticks every second</div>
+    </div>
+
+  </div>
+
+  <!--DISPLAY RESULTS-->
+
+  <div class="flex-row-container">
+
+    <div class="column">
+      <div>
+        <b>Obs1:</b>
+      </div>
+      <div>
+        <ul *ngFor="let elem of stream1Tick">
+          <li>
+            {{elem}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="column">
+      <div>
+        <b>Obs2:</b>
+      </div>
+      <div>
+        <ul *ngFor="let elem of stream2Tick">
+          <li>
+            {{elem}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="column">
+      <div>
+        <b>Obs1.scan():</b>
+      </div>
+      <div>
+        <ul *ngFor="let elem of stream1ScanTick">
+          <li>
+            {{elem | asArray}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</mat-drawer-container>

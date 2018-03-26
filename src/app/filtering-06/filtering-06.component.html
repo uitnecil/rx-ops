@@ -1,63 +1,64 @@
-<div class="page-header">
-  <div class="column margin-top-10px">
-    <strong>How to use:</strong>
-    <ul>
-      <li>Enter the desired length of the Array and press the <strong>Process</strong> button</li>
-      <li>After Process has been used once page needs to be refreshed in order for all operators to be re-instantiated
-      </li>
-      <li>Press <strong>Complete Source$</strong> to be able to view the results from last() and takeLast(n) operators
-        which require the source to complete
-      </li>
-    </ul>
-    <!--<strong>Signatures:</strong>-->
-    <!--<ul>-->
-      <!--<li>filter(select: Function, thisArg: any): Observable</li>-->
-      <!--<li>first(predicate: function, select: function)</li>-->
-      <!--<li>take(count: number): Observable</li>-->
-      <!--<li>takeLast(count: number): Observable</li>-->
-      <!--<li>last(count: number): Observable</li>-->
-      <!--<li>takeUntil(notifier: Observable): Observable</li>-->
-      <!--<li>takeWhile(predicate: function(value, index): boolean): Observable</li>-->
-    <!--</ul>-->
-  </div>
-  <div class="column font-small flex-width-33">
+<mat-drawer-container class="margin-top-10px">
+  <mat-drawer #drawer class="padding-10px font-small" mode="over">
+    <div class="close-sign" (click)="drawer.toggle()">X</div>
+    <h4>Operator Details</h4>
     <ul>
       <li>
         <span class="operator-title"> .filter(func)</span>
-        <strong>Description:</strong> Emit values that pass the provided condition.<br>
-        <strong>Signature:</strong> filter(select: Function, thisArg: any): Observable
+        <b>Description:</b> Emit values that pass the provided condition.<br>
+        <b>Signature:</b> filter(select: Function, thisArg: any): Observable
       </li>
       <li>
         <span class="operator-title"> .first()</span>
-        <strong>Description:</strong> Emit the first value or first to pass provided expression.<br>
-        <strong>Signature:</strong> first(predicate: function, select: function)
+        <b>Description:</b> Emit the first value or first to pass provided expression.<br>
+        <b>Signature:</b> first(predicate: function, select: function)
       </li>
       <li>
         <span class="operator-title"> .take(n)</span>
-        <strong>Description:</strong> Emit provided number of values before completing.<br>
-        <strong>Signature:</strong> take(count: number): Observable
+        <b>Description:</b> Emit provided number of values before completing.<br>
+        <b>Signature:</b> take(count: number): Observable
       </li>
       <li>
         <span class="operator-title"> .takeLast(n)</span>
-        <strong>Description:</strong> Emit the last values emitted from source on completion, based on provided
+        <b>Description:</b> Emit the last values emitted from source on completion, based on provided
         number.<br>
-        <strong>Signature:</strong> takeLast(count: number): Observable
+        <b>Signature:</b> takeLast(count: number): Observable
       </li>
       <li>
         <span class="operator-title"> .last(n)</span>
-        <strong>Description:</strong> Emit the last value emitted from source on completion, based on provided
-        expression.
-        <strong>Signature:</strong> last(predicate: function): Observable
+        <b>Description:</b> Emit the last value emitted from source on completion, based on provided
+        expression.<br>
+        <b>Signature:</b> last(predicate: function): Observable
       </li>
       <li>
         <span class="operator-title"> .takeUntil(Observable)</span>
-        <strong>Description:</strong> Emit values until provided observable emits.<br>
-        <strong>Signature:</strong> takeUntil(notifier: Observable): Observable
+        <b>Description:</b> Emit values until provided observable emits.<br>
+        <b>Signature:</b> takeUntil(notifier: Observable): Observable
       </li>
       <li>
         <span class="operator-title"> .takeWhile(function)</span>
-        <strong>Description:</strong> Emit values until provided expression is false.<br>
-        <strong>Signature:</strong> takeWhile(predicate: function(value, index): boolean): Observable
+        <b>Description:</b> Emit values until provided expression is false.<br>
+        <b>Signature:</b> takeWhile(predicate: function(value, index): boolean): Observable
+      </li>
+    </ul>
+  </mat-drawer>
+
+  <div class="page-header">
+
+    <div class="more-details">
+      <button type="button" mat-raised-button (click)="drawer.toggle()">
+        Details
+      </button>
+    </div>
+
+    <div class="column margin-top-10px">
+      <b>How to use:</b>
+      <ul>
+        <li>Enter the desired length of the Array and press the <b>Process</b> button</li>
+        <li>After Process has been used once page needs to be refreshed in order for all operators to be re-instantiated
+        </li>
+        <li>Press <b>Complete Source$</b> to be able to view the results from last() and takeLast(n) operators
+          which require the source to complete
       </li>
     </ul>
   </div>
@@ -67,13 +68,15 @@
     <div>
       <mat-form-field class="input">
         <input matInput placeholder="length [5..50], default 10" #input1 autofocus
-               (keydown.enter)="process(input1.value); input1.value = '';">
+               (keydown.enter)="process(input1.value); input1.value = ''; forcePipeRefresh = forcePipeRefresh * -1;">
       </mat-form-field>
-      <button mat-raised-button color="accent" (click)="process(input1.value); input1.value = '';">Process</button>
+      <button mat-raised-button color="accent"
+              (click)="process(input1.value); input1.value = ''; forcePipeRefresh = forcePipeRefresh * -1;">Process
+      </button>
     </div>
     <br>
     Test array:
-    <div>[ {{theArray.join(', ')}} ]</div>
+    <div>{{theArray | asArray }}</div>
   </div>
 
 </div>
@@ -84,7 +87,7 @@
 
   <div class="column-simple">
     <div>
-      <strong>filter(odd):</strong> {{filter$ | async}}
+      <b>filter(odd):</b> {{filter$ | async}}
     </div>
     <div>
       completed: {{filterCompleted || false}}
@@ -94,7 +97,7 @@
 
   <div class="column-simple">
     <div>
-      <strong>first():</strong> {{first$ | async}}
+      <b>first():</b> {{first$ | async}}
     </div>
     <div>
       completed: {{firstCompleted || false}}
@@ -103,7 +106,7 @@
 
   <div class="column-simple">
     <div>
-      <strong>take(3):</strong> {{take$ | async}}
+      <b>take(3):</b> {{take$ | async}}
     </div>
     <div>
       completed: {{takeCompleted || false}}
@@ -112,7 +115,7 @@
 
   <div class="column-simple">
     <div>
-      <strong>takeLast(2):</strong> {{takeLast$ | async}}
+      <b>takeLast(2):</b> {{takeLast$ | async}}
     </div>
     <div>
       completed: {{takeLastCompleted || false}}
@@ -121,19 +124,20 @@
 
   <div class="column-simple">
     <div>
-      <strong>last():</strong> {{last$ | async}}
+      <b>last():</b> {{last$ | async}}
     </div>
     <div>
       completed: {{lastCompleted || false}}
     </div>
     <div class="margin-top-10px">
-      <button mat-raised-button color="accent" (click)="valueGenerator.complete();">Complete Source$</button>
+      <button mat-raised-button color="accent" (click)="completevalueGeneratorSubject();">Push [-1] & Complete Source$
+      </button>
     </div>
   </div>
 
   <div class="column-simple">
     <div>
-      <strong>takeUntil(Obs):</strong> {{takeUntil$ | async}}
+      <b>takeUntil(Obs):</b> {{takeUntil$ | async}}
     </div>
     <div>
       completed: {{takeUntilCompleted || false}}
@@ -145,7 +149,7 @@
 
   <div class="column-simple">
     <div>
-      <strong>takeWhile():</strong> {{takeWhile$ | async}}
+      <b>takeWhile():</b> {{takeWhile$ | async}}
     </div>
     <div>
       completed: {{takeWhileCompleted || false}}

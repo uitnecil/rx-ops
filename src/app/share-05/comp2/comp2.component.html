@@ -1,0 +1,23 @@
+<div class="log-holder">
+  <div class="column">
+    <b>source Observable: {{countdownSubscription | async}} </b>
+    <div *ngFor="let elem of obs1List">
+      <div>{{elem | json}}</div>
+    </div>
+  </div>
+  <div class="column">
+    <!--more: http://reactivex.io/rxjs/test-file/spec-js/operators/shareReplay-spec.js.html <br>-->
+    <b>obs1$ = source$.shareReplay(1): {{countdownSubscription | async}} </b>
+    <div *ngFor="let elem of obsShareReplayList">
+      <div>{{elem | json}}</div>
+    </div>
+  </div>
+  <div class="column">
+    <!--more: http://reactivex.io/rxjs/test-file/spec-js/operators/publishReplay-spec.js.html <br>-->
+    <b>obs2$ = source$.publishReplay(1).refCount(): {{countdownSubscription | async}} </b>
+    <div *ngFor="let elem of obsPublishReplayList">
+      <div>{{elem | json}}</div>
+    </div>
+  </div>
+
+</div>

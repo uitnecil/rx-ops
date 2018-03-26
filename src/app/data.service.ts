@@ -57,7 +57,7 @@ export class DataService implements OnDestroy {
 
   onClose(evt): void {
     console.log(`WS Closed`, evt);
-    if (this.socket.readyState === WebSocket.OPEN) {
+    if (this.socket && this.socket.readyState === WebSocket.OPEN) {
       this.socket.close();
     }
     this.subscriptions.unsubscribe();

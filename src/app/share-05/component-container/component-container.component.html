@@ -1,0 +1,77 @@
+<mat-drawer-container class="margin-top-10px" autosize>
+  <mat-drawer #drawer class="padding-10px font-small" mode="over">
+    <div class="close-sign" (click)="drawer.toggle()">X</div>
+    <h4>Multicast Operators</h4>
+    <ul>
+
+      <li>
+        <span class="operator-title"> .shareReplay(n)</span>
+        <b>Description:</b> Share source among multiple subscribers with a ReplaySubject.<br>
+        Automatically starts emitting on 1st subscriber.<br>
+        Does not reset when all subscribers have unsubscribed.<br>
+        Continues emitting as long as the stream is not destroyed (e.g. lives in an angular service)<br>
+        <b>signature:</b> shareReplay(count: number): Observable
+      </li>
+
+      <li>
+        <span class="operator-title"> .publishReplay().refCount()</span>
+        <b>.publishReplay(n):</b> Share source among multiple subscribers.<br>
+        <b>.refCount():</b> (not official) Automatically handles subscriptions, <br>
+        eliminating the need for using connect().<br>
+        Automatically starts emitting on 1st subscriber.<br>
+        Resets (disconnects from source) when all subscribers unsubscribed.<br>
+
+        <b>signature:</b> publishReplay(): Observable
+        <b>signature:</b> refCount(): Observable
+      </li>
+
+    </ul>
+  </mat-drawer>
+
+  <div class="page-header">
+
+    <div class="more-details">
+      <button type="button" mat-raised-button (click)="drawer.toggle()">
+        Details
+      </button>
+    </div>
+
+    <div class="column margin-top-10px">
+      <b>Multicast operators example (shareReplay/publishReplay/...) explanations:</b>
+      <ul>
+        <li>
+          This module consists of an angular service which exposes 3 Observables that:
+          <ul>
+            <li>
+              1st one -> (<b>source$</b>) - collects all (using the scan operator) the ProductModels that flow through a
+              subject from within the service (keeps only the last 10 objects).
+            </li>
+            <li>
+              2nd one -> <b>obs1$ = source$.shareReplay(1)</b>
+            </li>
+            <li>
+              3rd one -> <b>obs2$ = source$.publishReplay(1).refCount()</b>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <b>Row 1</b> is a component which subscribes to only the <b>source$</b> observables.
+        </li>
+        <li>
+          <b>Row 2</b> is a component which subscribes with a delay to all Observables.
+        </li>
+        <li>
+          <b>Row 3</b> is a component which subscribes with a longer delay to all Observables.
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="container">
+    <app-comp1></app-comp1>
+    <app-comp2></app-comp2>
+    <app-comp3></app-comp3>
+  </div>
+
+</mat-drawer-container>

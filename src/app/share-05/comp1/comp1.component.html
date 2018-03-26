@@ -1,0 +1,15 @@
+<div class="log-holder">
+  <div class="column">
+    <b>source$:</b>
+    <div *ngFor="let elems of productsList">
+      <div>{{elems | json}}</div>
+    </div>
+  </div>
+  <div class="column">
+    <b>obs1$ = source$.shareReplay(1):</b> <span class="red">NOT SUBSCRIBED</span>
+  </div>
+  <div class="column">
+    <b>obs2$ = source$.publishReplay(1).refCount():</b> <span class="red">NOT SUBSCRIBED</span>
+  </div>
+
+</div>

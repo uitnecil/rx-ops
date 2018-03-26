@@ -1,151 +1,166 @@
-<div class="page-header">
-
-  <div class="column margin-top-10px">
-    <strong>How to use:</strong>
-    <ul>
-      <li><strong>combineLatest</strong> (static method/ instance method): Returns the combination of the latest values
-        from each stream. Values starts once both streams have returned at least one individual value.
-      </li>
-      <li><strong>zip</strong> (static method/ instance method): Returns the combination (array) of the values having
-        the same index, from each
-        stream (both streams have returned values corresponding to the same index). If only one
-        stream emits no results is emitted.
-      </li>
-      <li><strong>forkJoin</strong> (static method): Returns an array containing the last values returned by the
-        individual observables before
-        completion (doesn't matter how many values have been returned before completion).
-      <li><strong>race</strong> (static method/ instance method): Uses the values from the first emitting stream. If the
-        first stream emits an error, the error is used and the other streams are ignored.
-      </li>
-    </ul>
-  </div>
-
-  <div class="column font-small flex-width-33">
+<mat-drawer-container class="margin-top-10px" autosize>
+  <mat-drawer #drawer class="padding-10px font-small" mode="over">
+    <div class="close-sign" (click)="drawer.toggle()">X</div>
+    <h4>Operator Details</h4>
     <ul>
       <li>
         <span class="operator-title"> .combineLatest()</span>
-        <strong>Description:</strong> When any observable emits a value, emit the latest value from each.<br>
-        <strong>signature:</strong> combineLatest(observables: ...Observable, project: function): Observable
+        <b>Description:</b> When any observable emits a value, emit the latest value from each.<br>
+        <b>signature:</b> combineLatest(observables: ...Observable, project: function): Observable
       </li>
       <li>
         <span class="operator-title"> .zip()</span>
-        <strong>Description:</strong> After all observables emit, emit all values with the same index as an
+        <b>Description:</b> After all observables emit, emit all values with the same index as an
         array<br>
-        <strong>signature:</strong> zip(observables: *): Observable
+        <b>signature:</b> zip(observables: *): Observable
       </li>
       <li>
         <span class="operator-title"> .forkJoin()</span>
-        <strong>Description:</strong> When all observables complete, emit the last emitted value from each.<br>
-        <strong>signature:</strong> forkJoin(...args, selector : function): Observable
+        <b>Description:</b> When all observables complete, emit the last emitted value from each.<br>
+        <b>signature:</b> forkJoin(...args, selector : function): Observable
       </li>
       <li>
         <span class="operator-title"> .race(Obs1, Obs2)</span>
-        <strong>Description:</strong> Returns the observable to emit first.<br>
-        <strong>signature:</strong> race(observables: ...Observable): Observable
+        <b>Description:</b> Returns the observable to emit first.<br>
+        <b>signature:</b> race(observables: ...Observable): Observable
       </li>
     </ul>
-  </div>
-</div>
+  </mat-drawer>
 
-<div class="flex-row-container">
-  <div class="column">
-    Test data streams:
-    <div>Stream 1 (Obs1): [ '1-1', '1-2', '1-3', '1-4', '1-5', '1-end'] - ticks every second</div>
-    <div>Stream 2 (Obs2): [ '2-1', '2-2', '2-3', '2-4', '2-5', '2-end'] - ticks every 3 seconds</div>
-  </div>
+  <div class="page-header">
 
-</div>
-
-<!--DISPLAY RESULTS-->
-
-<div class="flex-row-container">
-
-  <div class="column">
-    <div>
-      <strong>Obs1:</strong>
+    <div class="more-details">
+      <button type="button" mat-raised-button (click)="drawer.toggle()">
+        Details
+      </button>
     </div>
-    <div>
-      <ul *ngFor="let elem of stream1Tick">
-        <li>
-          {{elem}}
+
+    <div class="column margin-top-10px">
+      <b>How to use:</b>
+      <ul>
+        <li><b>combineLatest</b> (static method/ instance method): Returns the combination of the latest
+          values
+          from each stream. Values starts once both streams have returned at least one individual value.
         </li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="column">
-    <div>
-      <strong>Obs2:</strong>
-    </div>
-    <div>
-      <ul *ngFor="let elem of stream2Tick">
-        <li>
-          {{elem}}
+        <li><b>zip</b> (static method/ instance method): Returns the combination (array) of the values having
+          the same index, from each
+          stream (both streams have returned values corresponding to the same index). If only one
+          stream emits no results is emitted.
         </li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="column">
-    <div>
-      <strong>Obs1.combineLatest(Obs2)
-        <br>
-        OR
-        <br>
-        ...combineLatest(Obs1, Obs2):</strong>
-    </div>
-    <div>
-      <ul *ngFor="let elem of streamsCombineLatestTick">
-        <li>
-          {{elem}}
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="column">
-    <div>
-      <strong>Obs1.zip(Obs2)
-        <br>
-        OR
-        <br>
-        ...zip(Obs1, Obs2):</strong>
-    </div>
-    <div>
-      <ul *ngFor="let elem of streamsZipTick">
-        <li>
-          {{elem}}
+        <li><b>forkJoin</b> (static method): Returns an array containing the last values returned by the
+          individual observables before
+          completion (doesn't matter how many values have been returned before completion).
+        <li><b>race</b> (static method/ instance method): Uses the values from the first emitting stream. If
+          the
+          first stream emits an error, the error is used and the other streams are ignored.
         </li>
       </ul>
     </div>
 
   </div>
 
-  <div class="column">
-    <div>
-      <strong>Observable.forkJoin(Obs1, Obs2):</strong>
+  <div class="flex-row-container">
+    <div class="column">
+      Test data streams:
+      <!--<div>Stream 1 (Obs1): [ '1-1', '1-2', '1-3', '1-4', '1-5', '1-end'] - ticks every second</div>-->
+      <div>Stream 1 (Obs1): {{dataStream1 | asArray}} - ticks every second</div>
+      <!--<div>Stream 2 (Obs2): [ '2-1', '2-2', '2-3', '2-4', '2-5', '2-end'] - ticks every 3 seconds</div>-->
+      <div>Stream 2 (Obs2): {{dataStream1 | asArray}} - ticks every 3 seconds</div>
     </div>
-    <div>
-      <ul *ngFor="let elem of streamsForkJoinTick">
-        <li>
-          {{elem}}
-        </li>
-      </ul>
-    </div>
+
   </div>
 
-  <div class="column">
-    <div>
-      <strong>Observable.race(Obs1, Obs2):</strong>
+  <!--DISPLAY RESULTS-->
+
+  <div class="flex-row-container">
+
+    <div class="column">
+      <div>
+        <b>Obs1:</b>
+      </div>
+      <div>
+        <ul *ngFor="let elem of stream1Tick">
+          <li>
+            {{elem}}
+          </li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <ul *ngFor="let elem of streamsRaceTick">
-        <li>
-          {{elem}}
-        </li>
-      </ul>
+
+    <div class="column">
+      <div>
+        <b>Obs2:</b>
+      </div>
+      <div>
+        <ul *ngFor="let elem of stream2Tick">
+          <li>
+            {{elem}}
+          </li>
+        </ul>
+      </div>
     </div>
+
+    <div class="column">
+      <div>
+        <b>Obs1.combineLatest(Obs2)
+          <br>
+          OR
+          <br>
+          ...combineLatest(Obs1, Obs2):</b>
+      </div>
+      <div>
+        <ul *ngFor="let elem of streamsCombineLatestTick">
+          <li>
+            {{elem | asArray}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="column">
+      <div>
+        <b>Obs1.zip(Obs2)
+          <br>
+          OR
+          <br>
+          ...zip(Obs1, Obs2):</b>
+      </div>
+      <div>
+        <ul *ngFor="let elem of streamsZipTick">
+          <li>
+            {{elem | asArray}}
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="column">
+      <div>
+        <b>Observable.forkJoin(Obs1, Obs2):</b>
+      </div>
+      <div>
+        <ul *ngFor="let elem of streamsForkJoinTick">
+          <li>
+            {{elem | asArray}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="column">
+      <div>
+        <b>Observable.race(Obs1, Obs2):</b>
+      </div>
+      <div>
+        <ul *ngFor="let elem of streamsRaceTick">
+          <li>
+            {{elem}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 
-
-</div>
+</mat-drawer-container>

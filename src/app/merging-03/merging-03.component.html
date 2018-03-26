@@ -1,122 +1,135 @@
-<div class="page-header">
-  <div class="column margin-top-10px">
-    <strong>How to use:</strong>
-    <ul>
-      <li><strong>Map</strong>: static method/ instance method.
-      </li>
-      <li><strong>Concat</strong> (static method/ instance method): Concatenates two streams. If first stream
-        is infinite, the values from the second stream will never be emitted.
-      </li>
-      <li><strong>Merge</strong>: static method/ instance method
-      </li>
-    </ul>
-  </div>
-  <div class="column font-small flex-width-33">
+<mat-drawer-container class="margin-top-10px">
+  <mat-drawer #drawer class="padding-10px font-small" mode="over">
+    <div class="close-sign" (click)="drawer.toggle()">X</div>
+    <h4>Operator Details</h4>
     <ul>
       <li>
         <span class="operator-title"> .map()</span>
-        <strong>Description:</strong> Apply projection with each value from source.<br>
-        <strong>signature:</strong> map(project: Function, thisArg: any): Observable
+        <b>Description:</b> Apply projection with each value from source.<br>
+        <b>signature:</b> map(project: Function, thisArg: any): Observable
       </li>
       <li>
         <span class="operator-title"> .merge()</span>
-        <strong>Description:</strong> Turn multiple observables into a single observable.<br>
-        <strong>signature:</strong> merge(input: Observable): Observable
+        <b>Description:</b> Turn multiple observables into a single observable.<br>
+        <b>signature:</b> merge(input: Observable): Observable
       </li>
       <li>
         <span class="operator-title"> .concat()</span>
-        <strong>Description:</strong> Subscribe to observables in order as previous completes, emit values.<br>
-        <strong>signature:</strong> concat(observables: ...*): Observable
+        <b>Description:</b> Subscribe to observables in order as previous completes, emit values.<br>
+        <b>signature:</b> concat(observables: ...*): Observable
       </li>
     </ul>
-  </div>
-</div>
+  </mat-drawer>
 
-<div class="flex-row-container">
-  <div class="column">
-    Test data streams:
-    <div>Stream 1 (Obs1): [ '1-1', '1-2', '1-3', '1-4', '1-5', '1-end'] - ticks every second</div>
-    <div>Stream 2 (Obs2): [ '2-1', '2-2', '2-3', '2-4', '2-5', '2-end'] - ticks every second</div>
-  </div>
+  <div class="page-header">
 
-</div>
-
-<!--DISPLAY RESULTS-->
-
-<div class="flex-row-container">
-
-  <div class="column">
-    <div>
-      <strong>Obs1:</strong>
+    <div class="more-details">
+      <button type="button" mat-raised-button (click)="drawer.toggle()">
+        Details
+      </button>
     </div>
-    <div>
-      <ul *ngFor="let elem of stream1Tick">
-        <li>
-          {{elem}}
+
+    <div class="column margin-top-10px">
+      <b>How to use:</b>
+      <ul>
+        <li><b>Map</b>: static method/ instance method.
+        </li>
+        <li><b>Concat</b> (static method/ instance method): Concatenates two streams. If first stream
+          is infinite, the values from the second stream will never be emitted.
+        </li>
+        <li><b>Merge</b>: static method/ instance method
         </li>
       </ul>
     </div>
   </div>
 
-  <div class="column">
-    <div>
-      <strong>Obs2:</strong>
+  <div class="flex-row-container">
+    <div class="column">
+      Test data streams:
+      <div>Stream 1 (Obs1): {{ dataStream1 | asArray }} - ticks every second</div>
+      <div>Stream 2 (Obs2): {{ dataStream2 | asArray }} - ticks every second</div>
     </div>
-    <div>
-      <ul *ngFor="let elem of stream2Tick">
-        <li>
-          {{elem}}
-        </li>
-      </ul>
-    </div>
+
   </div>
 
-  <div class="column">
-    <div>
-      <strong>Obs1.map(elem => otherVal + elem):</strong>
+  <!--DISPLAY RESULTS-->
+
+  <div class="flex-row-container">
+
+    <div class="column">
+      <div>
+        <b>Obs1:</b>
+      </div>
+      <div>
+        <ul *ngFor="let elem of stream1Tick">
+          <li>
+            {{elem}}
+          </li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <ul *ngFor="let elem of streamMapTick">
-        <li>
-          {{elem}}
-        </li>
-      </ul>
+
+    <div class="column">
+      <div>
+        <b>Obs2:</b>
+      </div>
+      <div>
+        <ul *ngFor="let elem of stream2Tick">
+          <li>
+            {{elem}}
+          </li>
+        </ul>
+      </div>
     </div>
+
+    <div class="column">
+      <div>
+        <b>Obs1.map(elem => otherVal + elem):</b>
+      </div>
+      <div>
+        <ul *ngFor="let elem of streamMapTick">
+          <li>
+            {{elem}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="column">
+      <div>
+        <b>merge(Obs1, Obs2)
+          <br>
+          OR
+          <br>
+          Obs1.merge(Obs2):</b>
+      </div>
+      <div>
+        <ul *ngFor="let elem of streamsMergeTick">
+          <li>
+            {{elem}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="column">
+      <div>
+        <b>concat(Obs1, Obs2)
+          <br>
+          OR
+          <br>
+          Obs1.concat(Obs2):</b>
+      </div>
+      <div>
+        <ul *ngFor="let elem of streamsConcatTick">
+          <li>
+            {{elem}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 
-
-  <div class="column">
-    <div>
-      <strong>merge(Obs1, Obs2)
-        <br>
-        OR
-        <br>
-        Obs1.merge(Obs2):</strong>
-    </div>
-    <div>
-      <ul *ngFor="let elem of streamsMergeTick">
-        <li>
-          {{elem}}
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="column">
-    <div>
-      <strong>concat(Obs1, Obs2)
-        <br>
-        OR
-        <br>
-        Obs1.concat(Obs2):</strong>
-    </div>
-    <div>
-      <ul *ngFor="let elem of streamsConcatTick">
-        <li>
-          {{elem}}
-        </li>
-      </ul>
-    </div>
-  </div>
-
-</div>
+</mat-drawer-container>

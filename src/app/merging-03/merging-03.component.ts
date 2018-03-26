@@ -23,6 +23,9 @@ export class Merging03Component implements OnInit, OnDestroy {
 
   private subs: Subscription = new Subscription();
 
+  public dataStream1: any[];
+  public dataStream2: any[];
+
   constructor() {
 
     this.stream1Tick = [];
@@ -31,11 +34,11 @@ export class Merging03Component implements OnInit, OnDestroy {
     this.streamsConcatTick = [];
     this.streamMapTick = [];
 
-    const data1 = [ '1-1', '1-2', '1-3', '1-4', '1-5', '1-end'];
-    const data2 = [ '2-1', '2-2', '2-3', '2-4', '2-5', '2-end'];
+    this.dataStream1 = ['1-1', '1-2', '1-3', '1-4', '1-5', '1-end'];
+    this.dataStream2 = ['2-1', '2-2', '2-3', '2-4', '2-5', '2-end'];
 
-    this.stream1 = Observable.from(data1).concatMap(arrayValue => Observable.timer(1000).map(() => arrayValue));
-    this.stream2 = Observable.from(data2).concatMap(arrayValue => Observable.timer(1000).map(() => arrayValue));
+    this.stream1 = Observable.from(this.dataStream1).concatMap(arrayValue => Observable.timer(1000).map(() => arrayValue));
+    this.stream2 = Observable.from(this.dataStream2).concatMap(arrayValue => Observable.timer(1000).map(() => arrayValue));
 
 
     const sub1 = this.stream1.subscribe(elem => {
