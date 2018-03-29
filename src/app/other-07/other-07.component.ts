@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import { HttpClient } from '@angular/common/http';
+
+import 'rxjs/add/operator/catch';
 
 @Component({
   selector: 'app-other-07',
@@ -13,6 +16,7 @@ export class Other07Component implements OnInit, OnDestroy {
   public stream1: Observable<any>;
   public stream2: Observable<any>;
   public stream1Scan: Observable<any>;
+  public retry$: Observable<any>;
 
   public stream1Tick: any[];
   public stream2Tick: any[];
@@ -47,10 +51,14 @@ export class Other07Component implements OnInit, OnDestroy {
 
     const sub3 = this.stream1Scan
       .do((val) => console.log(`.do() e.g.: array length`, val.length))
-      .subscribe(elems => {
-        console.log(`stream1 scan: ${elems}`);
-        this.stream1ScanTick.push(elems);
+      .subscribe(elements => {
+        console.log(`stream1 scan: ${elements}`);
+        this.stream1ScanTick.push(elements);
       });
+
+    this.retry$ = Observable.interval(1000)
+      .mergeMap(v => v > 3 ? Observable.throw(new Error(`[[ ${new Date()} ]] -> Custom Error!`)) : Observable.of(v))
+      .retry(3);
 
 
     // add all subscriptions to a parent subscription for un-subscribing in 1 line.
@@ -59,6 +67,7 @@ export class Other07Component implements OnInit, OnDestroy {
     this.unsubscribeAll.add(sub3);
 
   }
+
 
   ngOnInit() {
   }

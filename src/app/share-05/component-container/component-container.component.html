@@ -40,7 +40,7 @@
       <b>Multicast operators example (shareReplay/publishReplay/...) explanations:</b>
       <ul>
         <li>
-          This module consists of an angular service which exposes 3 Observables that:
+          This module consists of 3 components and an angular service which exposes 3 Observables that:
           <ul>
             <li>
               1st one -> (<b>source$</b>) - collects all (using the scan operator) the ProductModels that flow through a
@@ -55,13 +55,13 @@
           </ul>
         </li>
         <li>
-          <b>Row 1</b> is a component which subscribes to only the <b>source$</b> observables.
+          <b>Component 1</b> (1st row) subscribes to only the <b>source$</b> observables.
         </li>
         <li>
-          <b>Row 2</b> is a component which subscribes with a delay to all Observables.
+          <b>Component 2</b> (2nd row) subscribes with a delay to all Observables.
         </li>
         <li>
-          <b>Row 3</b> is a component which subscribes with a longer delay to all Observables.
+          <b>Component 3</b> (3rd row) subscribes with a longer delay to all Observables.
         </li>
       </ul>
     </div>

@@ -1,0 +1,50 @@
+<div class="flex-row-container border-top">
+  <div class="column">
+    Demos for operators:
+    <ul>
+      <li>.fromEvent()</li>
+      <li><b><span class="green">.debounceTime()</span></b></li>
+      <li>.pluck()</li>
+      <li>.distinctUntilChanged()</li>
+      <li>.map()</li>
+      <li>.do()</li>
+    </ul>
+
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Filter ... " #filter1 value="input1">
+    </mat-form-field>
+
+    Filtered results:
+    <div *ngFor="let elem of resultsInput1">
+      <div>
+        {{elem}}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="column">
+    Demos for operators:
+    <ul>
+      <li>.fromEvent()</li>
+      <li><b><span class="red">.throttleTime()</span></b></li>
+      <li>.pluck()</li>
+      <li>.distinctUntilChanged()</li>
+      <li>.startWith()</li>
+      <li>.map()</li>
+      <li>.do()</li>
+    </ul>
+
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Filter ..." #filter2 value="input2">
+    </mat-form-field>
+
+    Filtered results:
+    <div *ngFor="let elem of resultsInput2">
+      <div>
+        {{elem}}
+      </div>
+    </div>
+
+  </div>
+</div>

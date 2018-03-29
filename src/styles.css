@@ -26,6 +26,10 @@ body {
   min-height: 500px;
 }
 
+.min-height275 {
+  min-height: 275px;
+}
+
 .width25 {
   width: 25%;
 }
@@ -33,6 +37,11 @@ body {
 .red {
   color: red;
 }
+
+.green {
+  color: green;
+}
+
 
 .font-small {
   font-size: small;

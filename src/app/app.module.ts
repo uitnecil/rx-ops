@@ -20,6 +20,8 @@ import { Merging03Component } from './merging-03/merging-03.component';
 import { Other07Component } from './other-07/other-07.component';
 import { Share05Module } from './share-05/share-05.module';
 import { SharedModule } from './shared.module';
+import { Other07InputsComponent } from './other-07-inputs/other-07-inputs.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import { SharedModule } from './shared.module';
     Combining02Component,
     Filtering06Component,
     Merging03Component,
-    Other07Component
+    Other07Component,
+    Other07InputsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { SharedModule } from './shared.module';
     MatInputModule,
     MatTooltipModule,
     Share05Module,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   providers: [
     SERVICE_INJ,

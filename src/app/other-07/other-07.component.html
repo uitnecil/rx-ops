@@ -2,6 +2,7 @@
   <mat-drawer #drawer class="font-small" mode="over">
     <div class="close-sign" (click)="drawer.toggle()">X</div>
     <h4>Operator Details</h4>
+
     <ul>
       <li>
         <span class="operator-title"> .scan()</span>
@@ -16,31 +17,10 @@
       </li>
 
       <li>
-        <span class="operator-title"> .defaultIfEmpty()</span>
-        <b>Description:</b> Emit given value if nothing is emitted before completion.<br>
-        <b>Signature:</b> defaultIfEmpty(defaultValue: any): Observable
-      </li>
-
-      <li>
-        <span class="operator-title"> .debounce()</span>
-        <b>Description:</b> Discard emitted values that take less than the specified time, based on
-        selector
-        function, between output.<br>
-        <b>Signature:</b> debounce(durationSelector: function): Observable
-      </li>
-
-      <li>
         <span class="operator-title"> .debounceTime()</span>
         <b>Description:</b> Discard emitted values that take less than the specified time between
         output.<br>
         <b>Signature:</b> debounceTime(dueTime: number, scheduler: Scheduler): Observable
-      </li>
-
-      <li>
-        <span class="operator-title"> .throttle()</span>
-        <b>Description:</b> Emit value only when duration, determined by provided function, has
-        passed.<br>
-        <b>Signature:</b> throttle(durationSelector: function(value): Observable | Promise): Observable
       </li>
 
       <li>
@@ -56,24 +36,13 @@
       </li>
 
       <li>
-        <span class="operator-title"> .startWith()</span>
-        <b>Description:</b> Emit given value first.<br>
-        <b>Signature:</b> startWith(an: Values): Observable
-      </li>
-
-      <li>
         <span class="operator-title"> .retry(n)</span>
         <b>Description:</b> Emit values until provided observable emits.<br>
         <b>Signature:</b> takeUntil(notifier: Observable): Observable
       </li>
 
-      <li>
-        <span class="operator-title"> .retryWhen()</span>
-        <b>Description:</b> Emit values until provided observable emits.<br>
-        <b>Signature:</b> takeUntil(notifier: Observable): Observable
-      </li>
-
     </ul>
+
   </mat-drawer>
 
   <div class="page-header">
@@ -108,7 +77,7 @@
 
   <!--DISPLAY RESULTS-->
 
-  <div class="flex-row-container">
+  <div class="flex-row-container min-height275">
 
     <div class="column">
       <div>
@@ -146,6 +115,21 @@
             {{elem | asArray}}
           </li>
         </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <app-other-07-inputs></app-other-07-inputs>
+
+  <div class="flex-row-container min-height275">
+
+    <div class="column">
+      <div>
+        <b>Retrying 3 times on error : (see console for errror)</b>
+      </div>
+      <div>
+        {{retry$ | async}}
       </div>
     </div>
 
